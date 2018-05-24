@@ -2,10 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>0.0.3.0507</AssemblyVersion>
-    <FileVersion>0.0.3.0507</FileVersion>
+    <AssemblyVersion>0.0.4.0559</AssemblyVersion>
+    <FileVersion>0.0.4.0559</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
+    <Description>A simplified method to get JSON using HTTP &amp; deserialized it into the Object at once.
+
+Example:
+Sample sample = new JsonHttpClient&lt;Sample&gt;("http://localhost:10000/api/values").GetDeserializedObject();</Description>
+    <RepositoryUrl>https://github.com/sim756/sim756.Net.JsonHttp</RepositoryUrl>
+    <PackageProjectUrl>https://sim756.github.io/sim756.Net.JsonHttp</PackageProjectUrl>
+    <PackageTags>JSON, HTTP, deserialize, serialize</PackageTags>
+    <Copyright>sim756</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

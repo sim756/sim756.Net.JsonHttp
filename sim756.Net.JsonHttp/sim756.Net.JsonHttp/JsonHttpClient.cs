@@ -25,7 +25,7 @@ namespace sim756.Net.JsonHttp
 
         }
 
-        public T GetSerializedObject()
+        public T GetDeserializedObject()
         {
             if (string.IsNullOrEmpty(Url))
             {
