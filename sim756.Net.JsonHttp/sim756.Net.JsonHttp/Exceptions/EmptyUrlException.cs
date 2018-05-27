@@ -4,17 +4,17 @@ using System.Text;
 
 namespace sim756.Net.JsonHttp.Exceptions
 {
-    public class UrlEmptyException : Exception
+    public class EmptyUrlException : Exception
     {
-        public UrlEmptyException()
+        public EmptyUrlException()
         {
         }
 
-        public UrlEmptyException(string message) : base(message)
+        public EmptyUrlException(string message) : base(message)
         {
         }
 
-        public UrlEmptyException(string message, Exception inner) : base(message, inner)
+        public EmptyUrlException(string message, Exception inner) : base(message, inner)
         {
         }
     }

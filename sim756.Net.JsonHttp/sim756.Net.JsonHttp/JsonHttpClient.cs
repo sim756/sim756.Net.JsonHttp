@@ -6,6 +6,10 @@ using sim756.Net.JsonHttp.Exceptions;
 
 namespace sim756.Net.JsonHttp
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class JsonHttpClient<T>
     {
         public string Url { get; set; }
@@ -47,15 +51,23 @@ namespace sim756.Net.JsonHttp
             {
                 throw new EmptyUrlException();
             }
+
             if (webClient == null)
             {
                 return JsonConvert.DeserializeObject<T>(new WebClient().DownloadString(Url));
             }
+
             return JsonConvert.DeserializeObject<T>(webClient.DownloadString(Url));
 
             //return default(T);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TDeserialize"></typeparam>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static TDeserialize Deserialize<TDeserialize>(string url)
         {
 
