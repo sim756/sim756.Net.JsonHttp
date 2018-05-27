@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text;
 using Newtonsoft.Json;
 using sim756.Net.JsonHttp.Exceptions;
 
@@ -38,20 +39,24 @@ namespace sim756.Net.JsonHttp
         /// Gets JSON from the Url Property (otherwise set on url parameter) and returns the deserialized object of type T.
         /// </summary>
         /// <param name="url">Optional, assign or left "null" to use Url property.</param>
+        /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <returns>Deserialized object of type T.</returns>
-
-        public T GetDeserializedObject(string url = null)
+        public T Deserialize(string url = null, WebClient webClient = null)
         {
             if (string.IsNullOrEmpty(Url))
             {
-                throw new UrlEmptyException();
+                throw new EmptyUrlException();
             }
+            if (webClient == null)
+            {
+                return JsonConvert.DeserializeObject<T>(new WebClient().DownloadString(Url));
+            }
+            return JsonConvert.DeserializeObject<T>(webClient.DownloadString(Url));
 
-            return JsonConvert.DeserializeObject<T>(new WebClient().DownloadString(Url));
             //return default(T);
         }
 
-        public static TDeserialize GetDeserializedObject<TDeserialize>(string url)
+        public static TDeserialize Deserialize<TDeserialize>(string url)
         {
 
             return default(TDeserialize);
