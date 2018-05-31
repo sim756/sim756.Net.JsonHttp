@@ -56,6 +56,8 @@ namespace sim756.Net.JsonHttp
         /// <returns>JSON in string.</returns>
         public string Get(string url = null)
         {
+            url = IsUrlNull(url);
+
             return new WebClient().DownloadString(url);
         }
 
@@ -67,6 +69,8 @@ namespace sim756.Net.JsonHttp
         /// <returns></returns>
         public string Get(string url = null, WebClient webClient = null)
         {
+            url = IsUrlNull(url);
+
             if (webClient == null && this.WebClient != null)
             {
                 this.WebClient.DownloadString(url ?? throw new EmptyUrlException());
@@ -80,6 +84,31 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private string IsUrlNull(string url)
+        {
+            if (url == null && string.IsNullOrEmpty(Url))
+            {
+                throw new EmptyUrlException();
+            }
+
+            if (url == null && string.IsNullOrEmpty(Url) == false)
+            {
+                url = this.Url;
+            }
+
+            if (url != null && string.IsNullOrEmpty(Url) == true)
+            {
+                this.Url = url;
+            }
+
+            return url;
+        }
+
+        /// <summary>
         /// Gets JSON from the Url Property (otherwise set on url parameter) and returns the deserialized object of type T.
         /// </summary>
         /// <param name="url">Optional, assign or left "null" to use Url property.</param>
@@ -87,10 +116,7 @@ namespace sim756.Net.JsonHttp
         /// <returns>Deserialized object of type T.</returns>
         public T Deserialize(string url = null, WebClient webClient = null)
         {
-            if (url == null && string.IsNullOrEmpty(Url))
-            {
-                throw new EmptyUrlException();
-            }
+            url = IsUrlNull(url);
 
             if (webClient == null)
             {
@@ -104,14 +130,17 @@ namespace sim756.Net.JsonHttp
 
         /// <summary>
         /// 
-        /// </summary>
-        /// <typeparam name="TDeserialize"></typeparam>
-        /// <param name="url">Optional, assign or left "null" to use Url property.</param>
+        /// </summary>        
+        /// <param name="url">URL</param>
         /// <returns></returns>
-        public static TDeserialize Deserialize<TDeserialize>(string url = null)
+        public static T Deserialize(string url)
         {
+            if (url == null)
+            {
+                throw new EmptyUrlException();
+            }
 
-            return default(TDeserialize);
+            return default(T);
         }
 
         /// <summary>
