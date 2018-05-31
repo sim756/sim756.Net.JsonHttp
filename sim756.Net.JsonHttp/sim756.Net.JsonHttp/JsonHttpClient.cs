@@ -6,6 +6,43 @@ using sim756.Net.JsonHttp.Exceptions;
 
 namespace sim756.Net.JsonHttp
 {
+    public class JsonHttpClient
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="webClient"></param>
+        /// <returns></returns>
+        public static string Get(string url, WebClient webClient = null)
+        {
+            return webClient.DownloadString(url);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="webClient"></param>
+        /// <returns></returns>
+        public static T Deserialize<T>(string url, WebClient webClient = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="json"></param>
+        /// <returns></returns>
+        public static T Deserialize<T>(string json)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -22,10 +59,7 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         public WebClient WebClient { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Json { get; set; }
+
 
         /// <summary>
         /// 
@@ -44,43 +78,13 @@ namespace sim756.Net.JsonHttp
             this.Url = url;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
         public static void Post(string json)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Gets JSON string from the url.
-        /// </summary>
-        /// <param name="url">Optional, assign or left "null" to use Url property (URL property has to be set).</param>
-        /// <returns>JSON in string.</returns>
-        public string Get(string url = null)
-        {
-            url = IsUrlNull(url);
-
-            return new WebClient().DownloadString(url);
-        }
-
-        /// <summary>
-        /// Gets JSON string from the url using specified WebClient.
-        /// </summary>
-        /// <param name="url">Optional, assign or left "null" to use Url property (URL property has to be set).</param>
-        /// <param name="webClient"></param>
-        /// <returns></returns>
-        public string Get(string url = null, WebClient webClient = null)
-        {
-            url = IsUrlNull(url);
-
-            if (webClient == null && this.WebClient != null)
-            {
-                this.WebClient.DownloadString(url ?? throw new EmptyUrlException());
-            }
-            else
-            {
-                throw new WebClientException();
-            }
-
-            return webClient.DownloadString(url);
         }
 
         /// <summary>
@@ -130,17 +134,12 @@ namespace sim756.Net.JsonHttp
 
         /// <summary>
         /// 
-        /// </summary>        
-        /// <param name="url">URL</param>
+        /// </summary>
+        /// <param name="json"></param>
         /// <returns></returns>
-        public static T Deserialize(string url)
+        public T Deserialize(string json)
         {
-            if (url == null)
-            {
-                throw new EmptyUrlException();
-            }
-
-            return default(T);
+            return JsonConvert.DeserializeObject<T>(json);            
         }
 
         /// <summary>

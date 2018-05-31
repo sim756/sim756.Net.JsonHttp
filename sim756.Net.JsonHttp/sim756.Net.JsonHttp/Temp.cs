@@ -8,7 +8,7 @@ namespace sim756.Net.JsonHttp
     class Temp
     {
         private void TempMethod()
-        {            
+        {
             
         }
     }
