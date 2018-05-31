@@ -13,6 +13,7 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient<T>
     {
         public string Url { get; set; }
+        public WebClient WebClient { get; set; }
 
         public JsonHttpClient()
         {
@@ -32,11 +33,31 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// Gets JSON string from the url.
         /// </summary>
-        /// <param name="url">Optional, assign or left "null" to use Url property.</param>
+        /// <param name="url">Optional, assign or left "null" to use Url property (URL property has to be set).</param>
         /// <returns>JSON in string.</returns>
         public string Get(string url = null)
         {
             return new WebClient().DownloadString(url);
+        }
+
+        /// <summary>
+        /// Gets JSON string from the url using specified WebClient.
+        /// </summary>
+        /// <param name="url">Optional, assign or left "null" to use Url property (URL property has to be set).</param>
+        /// <param name="webClient"></param>
+        /// <returns></returns>
+        public string Get(string url = null, WebClient webClient = null)
+        {
+            if (webClient == null && this.WebClient != null)
+            {
+                this.WebClient.DownloadString(url ?? throw new EmptyUrlException());
+            }
+            else
+            {
+                throw new WebClientException();
+            }
+
+            return webClient.DownloadString(url);
         }
 
         /// <summary>
