@@ -12,20 +12,39 @@ namespace sim756.Net.JsonHttp
     /// <typeparam name="T"></typeparam>
     public class JsonHttpClient<T>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Url { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public WebClient WebClient { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Json { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public JsonHttpClient()
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url">Url Property.</param>
         public JsonHttpClient(string url)
         {
             this.Url = url;
         }
 
-        public static void Post()
+        public static void Post(string json)
         {
             throw new NotImplementedException();
         }
