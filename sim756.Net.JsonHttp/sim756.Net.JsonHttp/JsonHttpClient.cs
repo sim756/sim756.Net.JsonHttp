@@ -113,5 +113,14 @@ namespace sim756.Net.JsonHttp
 
             return default(TDeserialize);
         }
+
+        /// <summary>
+        /// [Deprecated] Use Deserialize() instead of GetDeserializedObject.
+        /// </summary>
+        /// <returns></returns>
+        public static T GetDeserializedObject()
+        {
+            throw new DeprecatedException("Use Deserialize() instead of GetDeserializedObject.");
+        }
     }
 }
