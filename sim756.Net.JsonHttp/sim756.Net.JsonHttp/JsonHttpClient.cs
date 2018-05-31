@@ -87,7 +87,7 @@ namespace sim756.Net.JsonHttp
         /// <returns>Deserialized object of type T.</returns>
         public T Deserialize(string url = null, WebClient webClient = null)
         {
-            if (string.IsNullOrEmpty(Url))
+            if (url == null && string.IsNullOrEmpty(Url))
             {
                 throw new EmptyUrlException();
             }
@@ -106,9 +106,9 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="TDeserialize"></typeparam>
-        /// <param name="url"></param>
+        /// <param name="url">Optional, assign or left "null" to use Url property.</param>
         /// <returns></returns>
-        public static TDeserialize Deserialize<TDeserialize>(string url)
+        public static TDeserialize Deserialize<TDeserialize>(string url = null)
         {
 
             return default(TDeserialize);
