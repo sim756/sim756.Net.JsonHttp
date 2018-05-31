@@ -6,6 +6,9 @@ using sim756.Net.JsonHttp.Exceptions;
 
 namespace sim756.Net.JsonHttp
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class JsonHttpClient
     {
         /// <summary>
@@ -41,6 +44,16 @@ namespace sim756.Net.JsonHttp
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="webClient"></param>
+        public static void Post(string json, WebClient webClient = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -52,14 +65,17 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
+        public T Object { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Url { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public WebClient WebClient { get; set; }
-
-
 
         /// <summary>
         /// 
@@ -76,16 +92,7 @@ namespace sim756.Net.JsonHttp
         public JsonHttpClient(string url)
         {
             this.Url = url;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="json"></param>
-        public static void Post(string json)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         /// <summary>
         /// 
@@ -140,6 +147,16 @@ namespace sim756.Net.JsonHttp
         public T Deserialize(string json)
         {
             return JsonConvert.DeserializeObject<T>(json);            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="webClient"></param>
+        public void Post(T objectToPost, WebClient webClient = null)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
