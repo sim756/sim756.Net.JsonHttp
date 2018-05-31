@@ -7,7 +7,7 @@ A simplified *Generic* method to get **JSON** using HTTP & get it deserialized i
 ###### Example:
 
 ```c#
-Sample sample = new JsonHttpClient<Sample>("http://localhost:10000/api/values").GetDeserializedObject(); 
+Sample sample = new JsonHttpClient<Sample>("http://localhost:10000/api/values").Deserialize(); 
 ```
 
 #### Source
