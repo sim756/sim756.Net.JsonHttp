@@ -39,14 +39,14 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Deserializes JSON into specified type T.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="json"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Type to deserialize the object into.</typeparam>
+        /// <param name="json">JSON.</param>
+        /// <returns>Deserialized object into type T.</returns>
         public static T Deserialize<T>(string json)
         {
-            throw new NotImplementedException();
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         /// <summary>
