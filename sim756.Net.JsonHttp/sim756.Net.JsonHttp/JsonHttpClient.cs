@@ -12,14 +12,14 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient
     {
         /// <summary>
-        /// 
+        /// Downloads JSON from specified URL using WebClient.
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="webClient"></param>
-        /// <returns>JSON downloaded from the url.</returns>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <param name="webClient">Optional. Customized WebClient.</param>
+        /// <returns>Downloaded JSON in string.</returns>
         public static string Get(string url, WebClient webClient = null)
-        {
-            if(webClient==null)
+        {            
+            if (webClient == null)
             {
                 return new WebClient().DownloadString(url);
             }
@@ -96,7 +96,7 @@ namespace sim756.Net.JsonHttp
         public JsonHttpClient(string url)
         {
             this.Url = url;
-        }        
+        }
 
         /// <summary>
         /// 
@@ -150,7 +150,7 @@ namespace sim756.Net.JsonHttp
         /// <returns></returns>
         public T Deserialize(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json);            
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         /// <summary>
