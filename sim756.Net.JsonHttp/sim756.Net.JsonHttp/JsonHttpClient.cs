@@ -50,6 +50,16 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
+        /// Serializes an object into JSON string.
+        /// </summary>
+        /// <param name="value">Object to be serialized.</param>
+        /// <returns>JSON.</returns>
+        public static string Serialize(object value)
+        {
+            return JsonConvert.SerializeObject(value, Formatting.Indented);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="json"></param>
@@ -130,7 +140,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <returns>Deserialized object of type T.</returns>
         public T Deserialize(string url = null, WebClient webClient = null)
-        {            
+        {
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
         }
 
@@ -140,7 +150,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="json">JSON</param>
         /// <returns>Deserialized object of type T.</returns>
         public T Deserialize(string json)
-        {            
+        {
             return JsonConvert.DeserializeObject<T>(json);
         }
 
