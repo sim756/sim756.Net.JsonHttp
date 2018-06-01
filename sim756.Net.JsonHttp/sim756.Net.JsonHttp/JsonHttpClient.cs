@@ -16,9 +16,13 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url"></param>
         /// <param name="webClient"></param>
-        /// <returns></returns>
+        /// <returns>JSON downloaded from the url.</returns>
         public static string Get(string url, WebClient webClient = null)
         {
+            if(webClient==null)
+            {
+                return new WebClient().DownloadString(url);
+            }
             return webClient.DownloadString(url);
         }
 
