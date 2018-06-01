@@ -18,7 +18,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient">Optional. Customized WebClient.</param>
         /// <returns>Downloaded JSON in string.</returns>
         public static string Get(string url, WebClient webClient = null)
-        {            
+        {
             if (webClient == null)
             {
                 return new WebClient().DownloadString(url);
@@ -29,13 +29,13 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="url"></param>
-        /// <param name="webClient"></param>
+        /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <param name="webClient">Optional. Customized WebClient.</param>
         /// <returns></returns>
         public static T Deserialize<T>(string url, WebClient webClient = null)
         {
-            throw new NotImplementedException();
+            return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(url));
         }
 
         /// <summary>
@@ -130,26 +130,17 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <returns>Deserialized object of type T.</returns>
         public T Deserialize(string url = null, WebClient webClient = null)
-        {
-            url = IsUrlNull(url);
-
-            if (webClient == null)
-            {
-                return JsonConvert.DeserializeObject<T>(new WebClient().DownloadString(Url));
-            }
-
-            return JsonConvert.DeserializeObject<T>(webClient.DownloadString(Url));
-
-            //return default(T);
+        {            
+            return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
         }
 
         /// <summary>
-        /// 
+        /// Deserializes JSON to specified type T
         /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
+        /// <param name="json">JSON</param>
+        /// <returns>Deserialized object of type T.</returns>
         public T Deserialize(string json)
-        {
+        {            
             return JsonConvert.DeserializeObject<T>(json);
         }
 
