@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sim756.Net.JsonHttp", "sim756.Net.JsonHttp\sim756.Net.JsonHttp.csproj", "{DC81BB91-20B1-4133-A653-1DAFEF7ACB9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{BA490348-867E-4111-8A85-C31A01183671}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,13 +17,17 @@ Global
 		{DC81BB91-20B1-4133-A653-1DAFEF7ACB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC81BB91-20B1-4133-A653-1DAFEF7ACB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC81BB91-20B1-4133-A653-1DAFEF7ACB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA490348-867E-4111-8A85-C31A01183671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA490348-867E-4111-8A85-C31A01183671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA490348-867E-4111-8A85-C31A01183671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA490348-867E-4111-8A85-C31A01183671}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
-		BuildVersion_StartDate = 2000/1/1
 		SolutionGuid = {9C11148F-7B5C-4AB7-980A-4FC1A4D516CC}
+		BuildVersion_StartDate = 2000/1/1
+		BuildVersion_BuildVersioningStyle = None.None.Increment.TimeStamp
 	EndGlobalSection
 EndGlobal

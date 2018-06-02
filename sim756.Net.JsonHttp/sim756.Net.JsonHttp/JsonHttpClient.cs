@@ -147,7 +147,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient"></param>
         public void DeserializeInside(string url = null, WebClient webClient = null)
         {
-            Object = JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
+            Object = JsonConvert.DeserializeObject<T>(((webClient ?? this.WebClient) ?? new WebClient()).DownloadString(IsUrlNull(url)));
         }
 
         /// <summary>
