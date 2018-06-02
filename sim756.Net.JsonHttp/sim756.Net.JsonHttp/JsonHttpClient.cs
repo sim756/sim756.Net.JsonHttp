@@ -105,6 +105,17 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="webClient"></param>
+        public JsonHttpClient(string url, WebClient webClient)
+        {
+            this.Url = url;
+            this.WebClient = webClient;
+        }
+
+        /// <summary>
         /// [For internal usage of the class only.]
         /// </summary>
         /// <param name="url">URL.</param>
