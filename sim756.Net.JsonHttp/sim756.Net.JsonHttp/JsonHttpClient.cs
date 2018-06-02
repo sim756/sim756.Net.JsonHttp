@@ -19,11 +19,7 @@ namespace sim756.Net.JsonHttp
         /// <returns>Downloaded JSON in string.</returns>
         public static string Get(string url, WebClient webClient = null)
         {
-            if (webClient == null)
-            {
-                return new WebClient().DownloadString(url);
-            }
-            return webClient.DownloadString(url);
+            return (webClient ?? new WebClient()).DownloadString(url);
         }
 
         /// <summary>
