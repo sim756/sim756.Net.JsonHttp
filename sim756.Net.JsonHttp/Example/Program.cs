@@ -29,7 +29,24 @@ namespace Example
             //3
             example = JsonHttpClient.DeserializeString<Example>("....JSON....");
 
+            //4
+            json = JsonHttpClient.Get("http://www.example.com");
 
+            //5
+            json = JsonHttpClient.Get("http://www.example.com", new System.Net.WebClient()
+            {
+                BaseAddress = "http://www.example.com",
+                Encoding = Encoding.Unicode,
+                Credentials = new Credential()
+            });
+
+            //6
+            json = JsonHttpClient.Serialize(new Example()
+            {
+                Uid = 756,
+                Property1 = "sim756",
+                Property2 = true
+            });            
         }
     }
 }
