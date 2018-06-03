@@ -12,7 +12,7 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient
     {
         /// <summary>
-        /// Downloads JSON from specified URL using WebClient.
+        /// Downloads JSON/Text from specified URL using WebClient.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
         /// <param name="webClient">Optional. Customized WebClient.</param>
@@ -60,7 +60,17 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="json"></param>
         /// <param name="webClient"></param>
-        public static void Post(string json, WebClient webClient = null)
+        public static void Post(string json, WebClient webClient)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
+        /// <param name="url"></param>
+        public static void Post(string json, string url)
         {
             throw new NotImplementedException();
         }
