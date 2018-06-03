@@ -145,10 +145,20 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url">Optional, assign or left "null" to use Url property.</param>        
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
+        /// <param name="keepWebClient"></param>
         /// <returns>Deserialized object of type T.</returns>
-        public T Deserialize(string url = null, WebClient webClient = null)
+        public T Deserialize(string url = null, WebClient webClient = null, bool keepWebClient = false)
         {
+            IsKeepWebClient(ref webClient, keepWebClient);
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
+        }
+
+        private void IsKeepWebClient(ref WebClient webClient, bool keepWebClient)
+        {
+            if (keepWebClient == true)
+            {
+                this.WebClient = webClient;
+            }
         }
 
         /// <summary>
@@ -156,8 +166,10 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url"></param>
         /// <param name="webClient"></param>
-        public void DeserializeInside(string url = null, WebClient webClient = null)
+        /// <param name="keepWebClient"></param>
+        public void DeserializeInside(string url = null, WebClient webClient = null, bool keepWebClient = false)
         {
+            IsKeepWebClient(ref webClient, keepWebClient);
             Object = JsonConvert.DeserializeObject<T>(((webClient ?? this.WebClient) ?? new WebClient()).DownloadString(IsUrlNull(url)));
         }
 
@@ -175,8 +187,10 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="webClient"></param>
-        public void Post(T objectToPost, WebClient webClient = null)
+        /// <param name="keepWebClient"></param>
+        public void Post(T objectToPost, WebClient webClient = null, bool keepWebClient = false)
         {
+            IsKeepWebClient(ref webClient, keepWebClient);
             throw new NotImplementedException();
         }
 
