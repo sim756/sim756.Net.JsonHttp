@@ -172,16 +172,49 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public T Deserialize()
+        {
+            return JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(this.Url));
+        }
+
+        /// <summary>
         /// Gets JSON from the Url Property (otherwise set on url parameter) and returns the deserialized object of type T.
         /// </summary>
         /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
+        /// <param name="keepUrl"></param>
         /// <param name="keepWebClient"></param>
         /// <returns>Deserialized object of type T.</returns>
-        public T Deserialize(string url = null, WebClient webClient = null, bool keepWebClient = false)
+        public T Deserialize(string url, WebClient webClient, bool keepUrl = false, bool keepWebClient = false)
         {
             IsKeepWebClient(ref webClient, keepWebClient);
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="webClient"></param>
+        /// <param name="keepWebClient"></param>
+        /// <returns></returns>
+        public T Deserialize(WebClient webClient, bool keepWebClient = false)
+        {
+            IsKeepWebClient(ref webClient, keepWebClient);
+            return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(Url)));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="keepUrl"></param>
+        /// <returns></returns>
+        public T Deserialize(string url, bool keepUrl = false)
+        {
+            return JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
         }
 
         /// <summary>
