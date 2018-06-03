@@ -74,6 +74,27 @@ namespace sim756.Net.JsonHttp
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        public void Post<T>(T objectToPost, string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectToPost"></param>
+        /// <param name="webClient"></param>
+        public void Post<T>(T objectToPost, WebClient webClient)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -157,7 +178,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <param name="keepWebClient"></param>
         /// <returns>Deserialized object of type T.</returns>
-        public T Deserialize(string url = null, WebClient webClient = null, bool keepWebClient = false)
+        public  T Deserialize(string url = null, WebClient webClient = null, bool keepWebClient = false)
         {
             IsKeepWebClient(ref webClient, keepWebClient);
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
@@ -195,6 +216,33 @@ namespace sim756.Net.JsonHttp
         public void DeserializeStringInside(string json)
         {
             Object = JsonConvert.DeserializeObject<T>(json);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Post()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        public void Post(string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        public void Post(T objectToPost, string url)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
