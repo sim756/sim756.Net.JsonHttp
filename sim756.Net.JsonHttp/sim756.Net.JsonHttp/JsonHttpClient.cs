@@ -153,7 +153,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// Gets JSON from the Url Property (otherwise set on url parameter) and returns the deserialized object of type T.
         /// </summary>
-        /// <param name="url">Optional, assign or left "null" to use Url property.</param>        
+        /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <param name="keepWebClient"></param>
         /// <returns>Deserialized object of type T.</returns>
@@ -163,6 +163,11 @@ namespace sim756.Net.JsonHttp
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
         }
 
+        /// <summary>
+        /// [For internal usage of the class only.]
+        /// </summary>
+        /// <param name="webClient">Customized WebClient.</param>
+        /// <param name="keepWebClient">Whether to assign webClient into WebClient Property.</param>
         private void IsKeepWebClient(ref WebClient webClient, bool keepWebClient)
         {
             if (keepWebClient == true)
@@ -172,10 +177,10 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Downloads JSON from Url, deserializes it into the type of T and assigns it into the Object property.
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="webClient"></param>
+        /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
+        /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <param name="keepWebClient"></param>
         public void DeserializeInside(string url = null, WebClient webClient = null, bool keepWebClient = false)
         {
@@ -184,9 +189,9 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Deserializes JSON string into the type of T and assigns into the Object property.
         /// </summary>
-        /// <param name="json"></param>
+        /// <param name="json">JSON to deserialize.</param>
         public void DeserializeStringInside(string json)
         {
             Object = JsonConvert.DeserializeObject<T>(json);
