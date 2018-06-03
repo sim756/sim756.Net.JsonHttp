@@ -178,7 +178,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <param name="keepWebClient"></param>
         /// <returns>Deserialized object of type T.</returns>
-        public  T Deserialize(string url = null, WebClient webClient = null, bool keepWebClient = false)
+        public T Deserialize(string url = null, WebClient webClient = null, bool keepWebClient = false)
         {
             IsKeepWebClient(ref webClient, keepWebClient);
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
@@ -201,12 +201,41 @@ namespace sim756.Net.JsonHttp
         /// Downloads JSON from Url, deserializes it into the type of T and assigns it into the Object property.
         /// </summary>
         /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
-        /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
+        public void DeserializeInside(string url)
+        {
+            Object = JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="webClient"></param>
         /// <param name="keepWebClient"></param>
-        public void DeserializeInside(string url = null, WebClient webClient = null, bool keepWebClient = false)
+        public void DeserializeInside(WebClient webClient, bool keepWebClient = false)
         {
             IsKeepWebClient(ref webClient, keepWebClient);
-            Object = JsonConvert.DeserializeObject<T>(((webClient ?? this.WebClient) ?? new WebClient()).DownloadString(IsUrlNull(url)));
+            Object = JsonConvert.DeserializeObject<T>(((webClient ?? this.WebClient) ?? new WebClient()).DownloadString(Url));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="webClient"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepWebClient"></param>
+        public void DeserializeInside(string url, WebClient webClient, bool keepUrl = false, bool keepWebClient = false)
+        {
+            IsKeepWebClient(ref webClient, keepWebClient);
+            Object = JsonConvert.DeserializeObject<T>(((webClient ?? this.WebClient) ?? new WebClient()).DownloadString(url));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void DeserializeInside()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -240,7 +269,8 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
-        public void Post(T objectToPost, string url)
+        /// <param name="keepObject"></param>
+        public void Post(T objectToPost, string url, bool keepObject = false)
         {
             throw new NotImplementedException();
         }
@@ -249,11 +279,11 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="objectToPost"></param>
+        /// <param name="keepObject"></param>
         /// <param name="webClient"></param>
         /// <param name="keepWebClient"></param>
-        public void Post(T objectToPost, WebClient webClient = null, bool keepWebClient = false)
+        public void Post(T objectToPost, WebClient webClient, bool keepObject = false, bool keepWebClient = false)
         {
-            IsKeepWebClient(ref webClient, keepWebClient);
             throw new NotImplementedException();
         }
 
