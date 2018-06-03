@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>0.0.13.0432</AssemblyVersion>
-    <FileVersion>0.0.13.0432</FileVersion>
+    <AssemblyVersion>0.0.14.0528</AssemblyVersion>
+    <FileVersion>0.0.14.0528</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.1.4</Version>
     <Description>A simplified method to get JSON using HTTP &amp; get it deserialized into the Object of specified Type at once.

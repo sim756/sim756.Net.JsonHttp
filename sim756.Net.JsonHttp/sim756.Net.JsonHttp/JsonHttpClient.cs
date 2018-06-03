@@ -183,7 +183,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// Gets JSON from the Url Property (otherwise set on url parameter) and returns the deserialized object of type T.
         /// </summary>
-        /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
+        /// <param name="url">URL to download JSON from.</param>
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
         /// <param name="keepUrl"></param>
         /// <param name="keepWebClient"></param>
