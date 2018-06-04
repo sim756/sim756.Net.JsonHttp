@@ -22,7 +22,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Downloads JSON/Text from specified URL using WebClient.
+        /// Downloads JSON from specified URL using WebClient.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
         /// <param name="webClient">Optional. Customized WebClient.</param>
@@ -33,12 +33,23 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Downloads JSON from the URL using default WebClient and returns the object into type T.
+        /// </summary>
+        /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <returns>Deserialized object into type T.</returns>
+        public static T Deserialize<T>(string url)
+        {
+            return JsonConvert.DeserializeObject<T>(new WebClient().DownloadString(url));
+        }
+
+        /// <summary>
+        /// Downloads JSON from the URL. 
         /// </summary>
         /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
         /// <param name="url">URL to download the JSON from.</param>
         /// <param name="webClient">Optional. Customized WebClient.</param>
-        /// <returns></returns>
+        /// <returns>Deserialized object into type T.</returns>
         public static T Deserialize<T>(string url, WebClient webClient = null)
         {
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(url));
@@ -69,9 +80,9 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
-        /// <param name="webClient"></param>
+        /// <param name="objectToPost">Object to serialize and post.</param>
+        /// <param name="url">URL.</param>
+        /// <param name="webClient">WebClient.</param>
         public void Post<T>(T objectToPost, string url, WebClient webClient)
         {
             if (webClient == null)
@@ -82,11 +93,11 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Posts JSON to the URL using the specified WebClient.
         /// </summary>
-        /// <param name="json"></param>
-        /// <param name="url"></param>
-        /// <param name="webClient"></param>
+        /// <param name="json">JSON.</param>
+        /// <param name="url">URL.</param>
+        /// <param name="webClient">WebClient.</param>
         public static void Post(string json, string url, WebClient webClient)
         {
             if (webClient == null)
@@ -97,20 +108,20 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Serializes the object and posts it to the URL specified.
         /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
+        /// <param name="objectToPost">Object to serialize and post.</param>
+        /// <param name="url">URL.</param>
         public void Post<T>(T objectToPost, string url)
         {
             new WebClient().UploadString(url, "POST", JsonConvert.SerializeObject(objectToPost, Formatting.Indented));
         }
 
         /// <summary>
-        /// 
+        /// Posts JSON to the URL specified.
         /// </summary>
-        /// <param name="json"></param>
-        /// <param name="url"></param>
+        /// <param name="json">JSON.</param>
+        /// <param name="url">URL.</param>
         public static void Post(string json, string url)
         {
             new WebClient().UploadString(url, "POST", json);
