@@ -103,7 +103,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="url"></param>
         public void Post<T>(T objectToPost, string url)
         {
-            throw new NotImplementedException();
+            new WebClient().UploadString(url, "POST", JsonConvert.SerializeObject(objectToPost, Formatting.Indented));
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="url"></param>
         public static void Post(string json, string url)
         {
-            throw new NotImplementedException();
+            new WebClient().UploadString(url, "POST", json);
         }
     }
 
