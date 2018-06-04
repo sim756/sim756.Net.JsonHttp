@@ -74,7 +74,11 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient"></param>
         public void Post<T>(T objectToPost, string url, WebClient webClient)
         {
-            throw new NotImplementedException();
+            if (webClient == null)
+            {
+                throw new WebClientException();
+            }
+            webClient.UploadString(url, "POST", JsonConvert.SerializeObject(objectToPost, Formatting.Indented));
         }
 
         /// <summary>
@@ -85,7 +89,11 @@ namespace sim756.Net.JsonHttp
         /// <param name="webClient"></param>
         public static void Post(string json, string url, WebClient webClient)
         {
-            throw new NotImplementedException();
+            if (webClient == null)
+            {
+                throw new WebClientException();
+            }
+            webClient.UploadString(url, "POST", json);
         }
 
         /// <summary>
