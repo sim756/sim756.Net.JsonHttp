@@ -244,6 +244,7 @@ namespace sim756.Net.JsonHttp
         /// Downloads JSON from Url, deserializes it into the type of T and assigns it into the Object property.
         /// </summary>
         /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
+        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
         public void DeserializeInside(string url, bool keepUrl = true)
         {
             Object = JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
@@ -274,7 +275,7 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url"></param>
         /// <param name="webClient"></param>
-        /// <param name="keepUrl"></param>
+        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
         /// <param name="keepWebClient"></param>
         public void DeserializeInside(string url, WebClient webClient, bool keepUrl = false, bool keepWebClient = false)
         {
@@ -294,8 +295,8 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="keepUrl"></param>
-        public void Post(string url, bool keepUrl =true)
+        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
+        public void Post(string url, bool keepUrl = true)
         {
             throw new NotImplementedException();
         }
@@ -306,7 +307,28 @@ namespace sim756.Net.JsonHttp
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
         /// <param name="keepObject"></param>
-        public void Post(T objectToPost, string url, bool keepObject = true)
+        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
+        public void Post(T objectToPost, string url, bool keepObject = true, bool keepUrl = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="keepObject"></param>
+        public void Post(T objectToPost, bool keepObject = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="webClient"></param>
+        /// <param name="keepWebClient"></param>
+        public void Post(WebClient webClient, bool keepWebClient = true)
         {
             throw new NotImplementedException();
         }
