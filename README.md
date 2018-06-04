@@ -2,7 +2,7 @@
 
 #### **JsonHttpClient\<T\>**
 
-A simplified Generic method to GET or POST JSON using HTTP, & get it deserialized or serialized into the Object of specified type. 
+A simplified Generic method to GET or POST JSON using HTTP, & get it deserialized or serialized into the Object of specified type.
 
 ###### Example:
 
