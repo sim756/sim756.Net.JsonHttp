@@ -233,11 +233,11 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Downloads JSON from Url (property), using a WebClient unless WebClient (property) is null and assigns the deserialized object into the Object property.
         /// </summary>
         public void DeserializeInside()
         {
-            throw new NotImplementedException();
+            Object = JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(Url));
         }
 
         /// <summary>
