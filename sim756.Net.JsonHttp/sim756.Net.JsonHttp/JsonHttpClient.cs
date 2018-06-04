@@ -12,7 +12,7 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient
     {
         /// <summary>
-        /// Downloads JSON/Text from specified URL.
+        /// Downloads JSON from specified URL.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
         /// <returns>Downloaded JSON in string.</returns>
@@ -135,17 +135,17 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient<T>
     {
         /// <summary>
-        /// 
+        /// Object that holds the object to be deserialized into or serialize form.
         /// </summary>
         public T Object { get; set; }
 
         /// <summary>
-        /// 
+        /// URL to be posted to or get the JSON from.
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
-        /// 
+        /// Customized WebClient.
         /// </summary>
         public WebClient WebClient { get; set; }
 
@@ -203,9 +203,9 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Deserialize the object into the Object property downloading the JSON from URL (property) using WebClient (property).
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Deserialized object of type T.</returns>
         public T Deserialize()
         {
             return JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(this.Url));
@@ -216,8 +216,8 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url">URL to download JSON from.</param>
         /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
-        /// <param name="keepUrl"></param>
-        /// <param name="keepWebClient"></param>
+        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
+        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
         /// <returns>Deserialized object of type T.</returns>
         public T Deserialize(string url, WebClient webClient, bool keepUrl = true, bool keepWebClient = true)
         {
@@ -229,7 +229,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="webClient"></param>
-        /// <param name="keepWebClient"></param>
+        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
         /// <returns></returns>
         public T Deserialize(WebClient webClient, bool keepWebClient = true)
         {
@@ -241,7 +241,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="keepUrl"></param>
+        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
         /// <returns></returns>
         public T Deserialize(string url, bool keepUrl = true)
         {
@@ -252,7 +252,7 @@ namespace sim756.Net.JsonHttp
         /// [For internal usage of the class only.]
         /// </summary>
         /// <param name="webClient">Customized WebClient.</param>
-        /// <param name="keepWebClient">Whether to assign webClient into WebClient Property.</param>
+        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
         private void IsKeepWebClient(ref WebClient webClient, bool keepWebClient)
         {
             if (keepWebClient == true)
@@ -292,7 +292,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="webClient"></param>
-        /// <param name="keepWebClient"></param>
+        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
         public void DeserializeInside(WebClient webClient, bool keepWebClient = true)
         {
             IsKeepWebClient(ref webClient, keepWebClient);
@@ -305,7 +305,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="url"></param>
         /// <param name="webClient"></param>
         /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        /// <param name="keepWebClient"></param>
+        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
         public void DeserializeInside(string url, WebClient webClient, bool keepUrl = false, bool keepWebClient = false)
         {
             IsKeepWebClient(ref webClient, keepWebClient);
@@ -335,7 +335,7 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
-        /// <param name="keepObject"></param>
+        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
         /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
         public void Post(T objectToPost, string url, bool keepObject = true, bool keepUrl = true)
         {
@@ -346,7 +346,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="objectToPost"></param>
-        /// <param name="keepObject"></param>
+        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
         public void Post(T objectToPost, bool keepObject = true)
         {
             throw new NotImplementedException();
@@ -356,7 +356,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="webClient"></param>
-        /// <param name="keepWebClient"></param>
+        /// <param name="keepWebClient">Whether to assign WebClient parameter to the WebClient property.</param>
         public void Post(WebClient webClient, bool keepWebClient = true)
         {
             throw new NotImplementedException();
@@ -366,9 +366,9 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="objectToPost"></param>
-        /// <param name="keepObject"></param>
+        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
         /// <param name="webClient"></param>
-        /// <param name="keepWebClient"></param>
+        /// <param name="keepWebClient">Whether to assign webClient parameter to the WebClient property.</param>
         public void Post(T objectToPost, WebClient webClient, bool keepObject = true, bool keepWebClient = true)
         {
             throw new NotImplementedException();
@@ -380,9 +380,9 @@ namespace sim756.Net.JsonHttp
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
         /// <param name="webClient"></param>
-        /// <param name="keepObject"></param>
-        /// <param name="keepUrl"></param>
-        /// <param name="keepWebClient"></param>
+        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
+        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
+        /// <param name="keepWebClient">Whether to assign webClient parameter to the WebClient property.</param>
         public void Post(T objectToPost, string url, WebClient webClient, bool keepObject = true, bool keepUrl = true, bool keepWebClient = true)
         {
             throw new NotImplementedException();
