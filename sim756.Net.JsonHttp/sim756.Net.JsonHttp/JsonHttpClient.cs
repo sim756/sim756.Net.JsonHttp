@@ -12,12 +12,22 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient
     {
         /// <summary>
+        /// Downloads JSON/Text from specified URL.
+        /// </summary>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <returns>Downloaded JSON in string.</returns>
+        public static string Get(string url)
+        {
+            return (new WebClient()).DownloadString(url);
+        }
+
+        /// <summary>
         /// Downloads JSON/Text from specified URL using WebClient.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
         /// <param name="webClient">Optional. Customized WebClient.</param>
         /// <returns>Downloaded JSON in string.</returns>
-        public static string Get(string url, WebClient webClient = null)
+        public static string Get(string url, WebClient webClient)
         {
             return (webClient ?? new WebClient()).DownloadString(url);
         }
