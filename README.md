@@ -2,7 +2,7 @@
 
 #### **JsonHttpClient**
 
-A simplified *Generic* method to get **JSON** using HTTP & get it deserialized into the Object of specified type.
+A simplified Generic method to GET or POST JSON using HTTP, & get it deserialized or serialized into the Object of specified type. 
 
 ###### Example:
 
@@ -81,7 +81,7 @@ json = JsonHttpClient.Serialize(new Example()
 
 #### Source
 
-[https://github.com/sim756/sim756.Net.JsonHttp](https://github.com/sim756/sim756.Net.JsonHttp)
+> [https://github.com/sim756/sim756.Net.JsonHttp](https://github.com/sim756/sim756.Net.JsonHttp)
 
 #### Other Sources
 
