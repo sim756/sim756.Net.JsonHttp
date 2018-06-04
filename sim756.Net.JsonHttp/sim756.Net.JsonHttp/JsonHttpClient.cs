@@ -58,9 +58,11 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="json"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
         /// <param name="webClient"></param>
-        public static void Post(string json, WebClient webClient)
+        public void Post<T>(T objectToPost, string url, WebClient webClient)
         {
             throw new NotImplementedException();
         }
@@ -70,7 +72,8 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="json"></param>
         /// <param name="url"></param>
-        public static void Post(string json, string url)
+        /// <param name="webClient"></param>
+        public static void Post(string json, string url, WebClient webClient)
         {
             throw new NotImplementedException();
         }
@@ -88,10 +91,9 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="objectToPost"></param>
-        /// <param name="webClient"></param>
-        public void Post<T>(T objectToPost, WebClient webClient)
+        /// <param name="json"></param>
+        /// <param name="url"></param>
+        public static void Post(string json, string url)
         {
             throw new NotImplementedException();
         }
