@@ -7,7 +7,7 @@ using sim756.Net.JsonHttp.Exceptions;
 namespace sim756.Net.JsonHttp
 {
     /// <summary>
-    /// 
+    /// A simplified Generic method to GET or POST JSON using HTTP, and get it deserialized or serialized into the Object of specified type.
     /// </summary>
     public class JsonHttpClient
     {
@@ -129,7 +129,7 @@ namespace sim756.Net.JsonHttp
     }
 
     /// <summary>
-    /// 
+    /// A simplified Generic method to GET or POST JSON using HTTP, and get it deserialized or serialized into the Object of specified type.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class JsonHttpClient<T>
