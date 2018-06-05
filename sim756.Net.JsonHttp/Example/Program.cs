@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using System.Net;
+using System.Net.Http;
 
 namespace Example
 {
@@ -11,12 +12,15 @@ namespace Example
         {
             Example example;
             string json;
+
             WebClient webClient = new WebClient()
             {
                 BaseAddress = "http://www.example.com",
                 Encoding = Encoding.Unicode,
                 Credentials = new Credential()
             };
+
+            HttpClient httpClient = new HttpClient();
 
             //1 Examples - JsonHttpClient<T>
             //1.1
@@ -37,7 +41,7 @@ namespace Example
             example = new JsonHttpClient<Example>().Deserialize("http://www.example.com");
 
             //1.5
-            example = new JsonHttpClient<Example>().Deserialize("http://www.example.com", webClient);
+            example = new JsonHttpClient<Example>().Deserialize("http://www.example.com", httpClient);
 
             //1.6
             example = new JsonHttpClient<Example>()
