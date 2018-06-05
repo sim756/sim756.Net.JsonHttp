@@ -20,10 +20,10 @@ namespace Example
 
             //1 Examples - JsonHttpClient<T>
             //1.1
-            example = new JsonHttpClient<Example>("http://www.example.com").Deserialize();
+            example = new JsonHttpClient<Example>("http://www.example.com").Deserialize().Result;
 
             //1.2
-            example = new JsonHttpClient<Example>("http://www.example.com", webClient).Deserialize();
+            example = new JsonHttpClient<Example>("http://www.example.com", webClient).Deserialize().Result;
 
             //1.3
             example = new JsonHttpClient<Example>("http://www.example.com", new WebClient()
@@ -31,7 +31,7 @@ namespace Example
                 BaseAddress = "http://www.example.com",
                 Encoding = Encoding.Unicode,
                 Credentials = new Credential()
-            }).Deserialize();
+            }).Deserialize().Result;
 
             //1.4
             example = new JsonHttpClient<Example>().Deserialize("http://www.example.com");
@@ -44,7 +44,7 @@ namespace Example
             {
                 Url = "http://www.example.com",
                 WebClient = webClient
-            }.Deserialize();
+            }.Deserialize().Result;
 
             //1.7
             JsonHttpClient<Example> jsonHttpClient = new JsonHttpClient<Example>("http://www.example.com");
