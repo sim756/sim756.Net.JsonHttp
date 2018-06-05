@@ -5,7 +5,7 @@
     <AssemblyVersion>0.0.26.1015</AssemblyVersion>
     <FileVersion>0.0.26.1015</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
     <Description>A simplified method to get JSON using HTTP &amp; get it deserialized into the Object of specified Type at once.
 
 Example:
@@ -14,7 +14,8 @@ Sample sample = new JsonHttpClient&lt;Sample&gt;("http://localhost:10000/api/val
     <PackageProjectUrl>https://sim756.github.io/sim756.Net.JsonHttp</PackageProjectUrl>
     <PackageTags>JSON, HTTP, deserialize, serialize, JsonHttpClient</PackageTags>
     <Copyright>sim756</Copyright>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/sim756/sim756.Net.JsonHttp/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
