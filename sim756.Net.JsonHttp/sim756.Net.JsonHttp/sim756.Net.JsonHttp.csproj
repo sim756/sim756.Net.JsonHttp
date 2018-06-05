@@ -16,6 +16,7 @@ Sample sample = new JsonHttpClient&lt;Sample&gt;("http://localhost:10000/api/val
     <Copyright>sim756</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://raw.githubusercontent.com/sim756/sim756.Net.JsonHttp/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/sim756/sim756.Net.JsonHttp/master/JsonHttpClient.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
