@@ -282,9 +282,18 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// Downloads JSON from Url (property), using a WebClient unless WebClient (property) is null and deserializes it into the type of T and assigns it into the Object property.
         /// </summary>
-        public void DeserializeInside()
+        public async void DeserializeInside()
         {
-            Object = JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(Url));
+            try
+            {
+                HttpResponseMessage response = await (this.HttpClient ?? new HttpClient()).GetAsync(Url);
+                response.EnsureSuccessStatusCode();
+                Object = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
