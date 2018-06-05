@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using sim756.Net.JsonHttp.Exceptions;
 
@@ -148,6 +150,11 @@ namespace sim756.Net.JsonHttp
         /// Customized WebClient.
         /// </summary>
         public WebClient WebClient { get; set; }
+
+        /// <summary>
+        /// Customized HttpClient
+        /// </summary>
+        public HttpClient HttpClient { get; set; }
 
         /// <summary>
         /// 
@@ -379,13 +386,29 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
-        /// <param name="webClient"></param>
-        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
-        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        /// <param name="keepWebClient">Whether to assign webClient parameter to the WebClient property.</param>
-        public void Post(T objectToPost, string url, WebClient webClient, bool keepObject = true, bool keepUrl = true, bool keepWebClient = true)
+        /// <param name="httpClient"></param>
+        /// <param name="keepObject"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public async Task Post(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
         {
-            throw new NotImplementedException();
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                // Above three lines can be replaced with new helper method below
+                // string responseBody = await client.GetStringAsync(uri);
+
+                Console.WriteLine(responseBody);
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine("\nException Caught!");
+                Console.WriteLine("Message :{0} ", e.Message);
+            }
+            httpClient.Dispose();
         }
 
         /// <summary>
