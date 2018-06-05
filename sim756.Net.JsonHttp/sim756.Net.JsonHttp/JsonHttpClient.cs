@@ -287,6 +287,28 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public T Deserialize(string url, HttpClient httpClient, bool keepUrl = true, bool keepHttpClient = true)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="webClient"></param>
         /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
         /// <returns></returns>
