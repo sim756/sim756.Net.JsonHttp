@@ -228,7 +228,7 @@ namespace sim756.Net.JsonHttp
             }
         }
 
-      
+
         /// <summary>
         /// 
         /// </summary>
@@ -260,6 +260,28 @@ namespace sim756.Net.JsonHttp
         {
             IsKeepWebClient(ref webClient, keepWebClient);
             return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public async Task<T> DeserializeAsync(string url, HttpClient httpClient, bool keepUrl = true, bool keepHttpClient = true)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
