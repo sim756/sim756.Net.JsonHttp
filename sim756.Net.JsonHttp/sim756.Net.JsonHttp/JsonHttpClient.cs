@@ -213,9 +213,20 @@ namespace sim756.Net.JsonHttp
         /// Deserialize the object into the Object property downloading the JSON from URL (property) using WebClient (property).
         /// </summary>
         /// <returns>Deserialized object of type T.</returns>
-        public T Deserialize()
+        public async T Deserialize()
         {
-            return JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(this.Url));
+            try
+            {
+                HttpResponseMessage response = await (this.HttpClient ?? new HttpClient()).GetAsync(Url);
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                // string responseBody = await client.GetStringAsync(uri);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+
         }
 
         /// <summary>
@@ -391,24 +402,61 @@ namespace sim756.Net.JsonHttp
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
-        public async Task Post(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        public async Task<string> Post(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
         {
             try
             {
                 HttpResponseMessage response = await httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                // Above three lines can be replaced with new helper method below
+                return await response.Content.ReadAsStringAsync();
                 // string responseBody = await client.GetStringAsync(uri);
-
-                Console.WriteLine(responseBody);
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
+                throw;
             }
-            httpClient.Dispose();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <typeparam name="TPost"></typeparam>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepObject"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public async Task<TResponse> Post<TResponse, TPost>(TPost objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                // string responseBody = await client.GetStringAsync(uri);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        public async Task<HttpResponseMessage> Post<TPost>(TPost objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return response;
+                // string responseBody = await client.GetStringAsync(uri);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
