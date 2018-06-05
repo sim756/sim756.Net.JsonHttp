@@ -296,7 +296,7 @@ namespace sim756.Net.JsonHttp
         {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(url);
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
                 return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
             }
