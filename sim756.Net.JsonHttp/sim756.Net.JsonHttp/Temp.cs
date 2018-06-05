@@ -9,7 +9,7 @@ namespace sim756.Net.JsonHttp
     {
         private void TempMethod()
         {
-
+            new JsonHttpClient<Temp>("").;
         }
     }
 }

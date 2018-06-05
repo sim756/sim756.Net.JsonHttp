@@ -213,7 +213,7 @@ namespace sim756.Net.JsonHttp
         /// Deserialize the object into the Object property downloading the JSON from URL (property) using WebClient (property).
         /// </summary>
         /// <returns>Deserialized object of type T.</returns>
-        public async Task<T> Deserialize()
+        public async Task<T> DeserializeAsync()
         {
             try
             {
@@ -226,7 +226,26 @@ namespace sim756.Net.JsonHttp
             {
                 throw;
             }
+        }
 
+      
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public T Deserialize()
+        {
+            try
+            {
+                HttpResponseMessage response = (this.HttpClient ?? new HttpClient()).GetAsync(Url).Result;
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+                // string responseBody = await client.GetStringAsync(uri);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
