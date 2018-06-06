@@ -210,49 +210,126 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Deserialize the object into the Object property downloading the JSON from URL (property) using WebClient (property).
+        /// 
         /// </summary>
-        /// <returns>Deserialized object of type T.</returns>
-        public async Task<T> Deserialize()
+        /// <returns></returns>
+        public T Deserialize()
         {
             try
             {
-                HttpResponseMessage response = await (this.HttpClient ?? new HttpClient()).GetAsync(Url);
+                HttpResponseMessage response = (this.HttpClient ?? new HttpClient()).GetAsync(Url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
                 // string responseBody = await client.GetStringAsync(uri);
             }
             catch (HttpRequestException e)
             {
                 throw;
             }
-
         }
 
         /// <summary>
-        /// Gets JSON from the Url Property (otherwise set on url parameter) and returns the deserialized object of type T.
+        /// Deserialize the object into the Object property downloading the JSON from URL (property) using WebClient (property).
         /// </summary>
-        /// <param name="url">URL to download JSON from.</param>
-        /// <param name="webClient">Customized WebClient or left "null" to use default.</param>
-        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
         /// <returns>Deserialized object of type T.</returns>
-        public T Deserialize(string url, WebClient webClient, bool keepUrl = true, bool keepWebClient = true)
+        public async Task<T> DeserializeAsync()
         {
-            IsKeepWebClient(ref webClient, keepWebClient);
-            return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
+            try
+            {
+                HttpResponseMessage response = await (this.HttpClient ?? new HttpClient()).GetAsync(Url);
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="webClient"></param>
-        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
         /// <returns></returns>
-        public T Deserialize(WebClient webClient, bool keepWebClient = true)
+        public T Deserialize(string url, HttpClient httpClient, bool keepUrl = true, bool keepHttpClient = true)
         {
-            IsKeepWebClient(ref webClient, keepWebClient);
-            return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(IsUrlNull(Url)));
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public async Task<T> DeserializeAsync(string url, HttpClient httpClient, bool keepUrl = true, bool keepHttpClient = true)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public T Deserialize(HttpClient httpClient, bool keepHttpClient = true)
+        {
+            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(Url).Result;
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public async Task<T> DeserializeAsync(HttpClient httpClient, bool keepHttpClient = true)
+        {
+            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(Url);
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -280,6 +357,19 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="keepHttpClient"></param>
+        private void IsKeepHttpClient(ref HttpClient httpClient, bool keepHttpClient)
+        {
+            if (keepHttpClient == true)
+            {
+                this.HttpClient = httpClient;
+            }
+        }
+
+        /// <summary>
         /// Downloads JSON from Url (property), using a WebClient unless WebClient (property) is null and deserializes it into the type of T and assigns it into the Object property.
         /// </summary>
         public async void DeserializeInside()
@@ -288,7 +378,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = await (this.HttpClient ?? new HttpClient()).GetAsync(Url);
                 response.EnsureSuccessStatusCode();
-                Object = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                Object = await response.Content.ReadAsAsync<T>();
             }
             catch (HttpRequestException e)
             {
@@ -453,14 +543,24 @@ namespace sim756.Net.JsonHttp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TPost"></typeparam>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepObject"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
         public async Task<HttpResponseMessage> Post<TPost>(TPost objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
         {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(url);
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
                 response.EnsureSuccessStatusCode();
                 return response;
-                // string responseBody = await client.GetStringAsync(uri);
             }
             catch (HttpRequestException e)
             {

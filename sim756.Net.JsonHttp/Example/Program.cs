@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using System.Net;
+using System.Net.Http;
 
 namespace Example
 {
@@ -11,6 +12,7 @@ namespace Example
         {
             Example example;
             string json;
+
             WebClient webClient = new WebClient()
             {
                 BaseAddress = "http://www.example.com",
@@ -18,12 +20,14 @@ namespace Example
                 Credentials = new Credential()
             };
 
+            HttpClient httpClient = new HttpClient();
+
             //1 Examples - JsonHttpClient<T>
             //1.1
-            example = new JsonHttpClient<Example>("http://www.example.com").Deserialize().Result;
+            example = new JsonHttpClient<Example>("http://www.example.com").Deserialize();
 
             //1.2
-            example = new JsonHttpClient<Example>("http://www.example.com", webClient).Deserialize().Result;
+            example = new JsonHttpClient<Example>("http://www.example.com", webClient).Deserialize();
 
             //1.3
             example = new JsonHttpClient<Example>("http://www.example.com", new WebClient()
@@ -31,20 +35,20 @@ namespace Example
                 BaseAddress = "http://www.example.com",
                 Encoding = Encoding.Unicode,
                 Credentials = new Credential()
-            }).Deserialize().Result;
+            }).Deserialize();
 
             //1.4
             example = new JsonHttpClient<Example>().Deserialize("http://www.example.com");
 
             //1.5
-            example = new JsonHttpClient<Example>().Deserialize("http://www.example.com", webClient);
+            example = new JsonHttpClient<Example>().Deserialize("http://www.example.com", httpClient);
 
             //1.6
             example = new JsonHttpClient<Example>()
             {
                 Url = "http://www.example.com",
                 WebClient = webClient
-            }.Deserialize().Result;
+            }.Deserialize();
 
             //1.7
             JsonHttpClient<Example> jsonHttpClient = new JsonHttpClient<Example>("http://www.example.com");

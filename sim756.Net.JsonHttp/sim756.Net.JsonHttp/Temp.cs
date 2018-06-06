@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace sim756.Net.JsonHttp
 {
@@ -9,6 +10,7 @@ namespace sim756.Net.JsonHttp
     {
         private void TempMethod()
         {
+           //Temp r = new JsonHttpClient<Temp>("").
 
         }
     }
