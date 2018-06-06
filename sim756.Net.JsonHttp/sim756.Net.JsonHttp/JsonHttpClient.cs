@@ -388,9 +388,23 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
         /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
+        public async Task DeserializeInsideAync(string url, bool keepUrl = true)
+        {
+            HttpResponseMessage response = await this.HttpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            Object = await response.Content.ReadAsAsync<T>();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="keepUrl"></param>
         public void DeserializeInside(string url, bool keepUrl = true)
         {
-            Object = JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
+            HttpResponseMessage response = this.HttpClient.GetAsync(url).Result;
+            response.EnsureSuccessStatusCode();
+            Object = response.Content.ReadAsAsync<T>().Result;
         }
 
         /// <summary>
@@ -406,10 +420,10 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="httpClient"></param>
-        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
-        public void DeserializeInside(HttpClient httpClient, bool keepWebClient = true)
+        /// <param name="keepHttpClient">Whether to assign url parameter to the Url property.</param>
+        public void DeserializeInside(HttpClient httpClient, bool keepHttpClient = true)
         {
-            IsKeepHttpClient(ref httpClient, keepWebClient);
+            IsKeepHttpClient(ref httpClient, keepHttpClient);
             HttpResponseMessage response = httpClient.GetAsync(Url).Result;
             response.EnsureSuccessStatusCode();
             Object = response.Content.ReadAsAsync<T>().Result;
