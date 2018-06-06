@@ -298,7 +298,7 @@ namespace sim756.Net.JsonHttp
         /// <returns></returns>
         public T Deserialize(HttpClient httpClient, bool keepHttpClient = true)
         {
-            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            IsKeepHttpClient(httpClient, keepHttpClient);
             try
             {
                 HttpResponseMessage response = httpClient.GetAsync(Url).Result;
@@ -319,7 +319,7 @@ namespace sim756.Net.JsonHttp
         /// <returns></returns>
         public async Task<T> DeserializeAsync(HttpClient httpClient, bool keepHttpClient = true)
         {
-            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            IsKeepHttpClient(httpClient, keepHttpClient);
             try
             {
                 HttpResponseMessage response = await httpClient.GetAsync(Url);
@@ -349,20 +349,6 @@ namespace sim756.Net.JsonHttp
             catch (HttpRequestException e)
             {
                 throw;
-            }
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="httpClient"></param>
-        /// <param name="keepHttpClient"></param>
-        private void IsKeepHttpClient(ref HttpClient httpClient, bool keepHttpClient)
-        {
-            if (keepHttpClient == true)
-            {
-                this.HttpClient = httpClient;
             }
         }
 
@@ -423,7 +409,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="keepHttpClient">Whether to assign url parameter to the Url property.</param>
         public void DeserializeInside(HttpClient httpClient, bool keepHttpClient = true)
         {
-            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            IsKeepHttpClient(httpClient, keepHttpClient);
             HttpResponseMessage response = httpClient.GetAsync(Url).Result;
             response.EnsureSuccessStatusCode();
             Object = response.Content.ReadAsAsync<T>().Result;
@@ -436,7 +422,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="keepHttpClient"></param>
         public async void DeserializeInsideAsync(HttpClient httpClient, bool keepHttpClient = true)
         {
-            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            IsKeepHttpClient(httpClient, keepHttpClient);
             HttpResponseMessage response = await httpClient.GetAsync(Url);
             response.EnsureSuccessStatusCode();
             Object = await response.Content.ReadAsAsync<T>();
@@ -451,7 +437,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="keepHttpClient">Whether to assign url parameter to the Url property.</param>
         public void DeserializeInside(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
         {
-            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            IsKeepHttpClient(httpClient, keepHttpClient);
             HttpResponseMessage response = httpClient.GetAsync(url).Result;
             response.EnsureSuccessStatusCode();
             Object = response.Content.ReadAsAsync<T>().Result;
@@ -466,7 +452,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="keepHttpClient"></param>
         public async void DeserializeInsideAsync(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
         {
-            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            IsKeepHttpClient(httpClient, keepHttpClient);
             HttpResponseMessage response = await httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
             Object = await response.Content.ReadAsAsync<T>();
@@ -475,83 +461,30 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        public void Post()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        public void Post(string url, bool keepUrl = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
-        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
-        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        public void Post(T objectToPost, string url, bool keepObject = true, bool keepUrl = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
-        public void Post(T objectToPost, bool keepObject = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="webClient"></param>
-        /// <param name="keepWebClient">Whether to assign WebClient parameter to the WebClient property.</param>
-        public void Post(WebClient webClient, bool keepWebClient = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="keepObject">Whether to assign object parameter to the Object property.</param>
-        /// <param name="webClient"></param>
-        /// <param name="keepWebClient">Whether to assign webClient parameter to the WebClient property.</param>
-        public void Post(T objectToPost, WebClient webClient, bool keepObject = true, bool keepWebClient = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
-        /// <param name="httpClient"></param>
-        /// <param name="keepObject"></param>
-        /// <param name="keepUrl"></param>
-        /// <param name="keepHttpClient"></param>
-        /// <returns></returns>
-        public async Task<string> Post(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        public HttpResponseMessage Post()
         {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(url);
+                HttpResponseMessage response = this.HttpClient.PostAsJsonAsync(new Uri(this.Url), this.Object).Result;
                 response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync();
-                // string responseBody = await client.GetStringAsync(uri);
+                return response;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public async Task<HttpResponseMessage> PostAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await this.HttpClient.PostAsJsonAsync(new Uri(this.Url), this.Object);
+                response.EnsureSuccessStatusCode();
+                return response;
             }
             catch (HttpRequestException e)
             {
@@ -563,7 +496,6 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
-        /// <typeparam name="TPost"></typeparam>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
         /// <param name="httpClient"></param>
@@ -571,14 +503,45 @@ namespace sim756.Net.JsonHttp
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
-        public async Task<TResponse> Post<TResponse, TPost>(TPost objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        public async Task<TResponse> PostAsync<TResponse>(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
         {
+            IsKeepObject(objectToPost, keepObject);
+            IsKeepUrl(url, keepUrl);
+            IsKeepHttpClient(httpClient, keepHttpClient);
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(url);
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
                 response.EnsureSuccessStatusCode();
+
                 return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
-                // string responseBody = await client.GetStringAsync(uri);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepObject"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public async Task<HttpResponseMessage> PostAsync(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        {
+            IsKeepObject(objectToPost, keepObject);
+            IsKeepUrl(url, keepUrl);
+            IsKeepHttpClient(httpClient, keepHttpClient);
+            try
+            {
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
+                response.EnsureSuccessStatusCode();
+                return response;
             }
             catch (HttpRequestException e)
             {
@@ -590,6 +553,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="TPost"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
         /// <param name="httpClient"></param>
@@ -597,17 +561,88 @@ namespace sim756.Net.JsonHttp
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
-        public async Task<HttpResponseMessage> Post<TPost>(TPost objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        public HttpResponseMessage Post(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
         {
+            IsKeepObject(objectToPost, keepObject);
+            IsKeepUrl(url, keepUrl);
+            IsKeepHttpClient(httpClient, keepHttpClient);
+
             try
             {
-                HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
+                HttpResponseMessage response = httpClient.PostAsJsonAsync(new Uri(url), objectToPost).Result;
                 response.EnsureSuccessStatusCode();
                 return response;
             }
             catch (HttpRequestException e)
             {
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepObject"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
+        public TResponse Post<TResponse>(T objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
+        {
+            IsKeepObject(objectToPost, keepObject);
+            IsKeepUrl(url, keepUrl);
+            IsKeepHttpClient(httpClient, keepHttpClient);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return JsonConvert.DeserializeObject<TResponse>(response.Content.ReadAsStringAsync().Result);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="keepObject"></param>
+        private void IsKeepObject(T objectToPost, bool keepObject)
+        {
+            if (keepObject == true)
+            {
+                this.Object = objectToPost;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="keepHttpClient"></param>
+        private void IsKeepHttpClient(HttpClient httpClient, bool keepHttpClient)
+        {
+            if (keepHttpClient == true)
+            {
+                this.HttpClient = httpClient;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="keepUrl"></param>
+        private void IsKeepUrl(string url, bool keepUrl)
+        {
+            if (keepUrl == true)
+            {
+                this.Url = url;
             }
         }
     }

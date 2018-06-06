@@ -27,14 +27,12 @@ namespace Example
             example = new JsonHttpClient<Example>("http://www.example.com").Deserialize();
 
             //1.2
-            example = new JsonHttpClient<Example>("http://www.example.com", webClient).Deserialize();
+            example = new JsonHttpClient<Example>("http://www.example.com", new HttpClient()).Deserialize();
 
             //1.3
-            example = new JsonHttpClient<Example>("http://www.example.com", new WebClient()
+            example = new JsonHttpClient<Example>("http://www.example.com", new HttpClient()
             {
-                BaseAddress = "http://www.example.com",
-                Encoding = Encoding.Unicode,
-                Credentials = new Credential()
+
             }).Deserialize();
 
             //1.4

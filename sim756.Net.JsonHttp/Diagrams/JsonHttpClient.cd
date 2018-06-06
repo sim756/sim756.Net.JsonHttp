@@ -8,9 +8,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="sim756.Net.JsonHttp.JsonHttpClient&lt;T&gt;">
-    <Position X="5" Y="0.5" Width="6.75" />
+    <Position X="5" Y="0.5" Width="10.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAgAAAAEAAACAJAAEAACAAAAAAACEI=</HashCode>
+      <HashCode>CAIAAAAAAggAAAAgAIAAAAIACAJAAEAACAAAAgAAAEI=</HashCode>
       <FileName>D:\sim756\Source\GitHub\Repos\sim756.Net.JsonHttp\sim756.Net.JsonHttp\sim756.Net.JsonHttp\JsonHttpClient.cs</FileName>
     </TypeIdentifier>
   </Class>
