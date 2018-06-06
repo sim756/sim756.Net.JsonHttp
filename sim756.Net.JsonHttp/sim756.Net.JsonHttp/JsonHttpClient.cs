@@ -317,7 +317,7 @@ namespace sim756.Net.JsonHttp
         /// <param name="httpClient"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
-        public async Task< T> DeserializeAsync(HttpClient httpClient, bool keepHttpClient = true)
+        public async Task<T> DeserializeAsync(HttpClient httpClient, bool keepHttpClient = true)
         {
             IsKeepHttpClient(ref httpClient, keepHttpClient);
             try
@@ -378,7 +378,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = await (this.HttpClient ?? new HttpClient()).GetAsync(Url);
                 response.EnsureSuccessStatusCode();
-                Object = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                Object = await response.Content.ReadAsAsync<T>();
             }
             catch (HttpRequestException e)
             {
@@ -543,14 +543,24 @@ namespace sim756.Net.JsonHttp
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TPost"></typeparam>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepObject"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        /// <returns></returns>
         public async Task<HttpResponseMessage> Post<TPost>(TPost objectToPost, string url, HttpClient httpClient, bool keepObject = true, bool keepUrl = true, bool keepHttpClient = true)
         {
             try
             {
-                HttpResponseMessage response = await httpClient.GetAsync(url);
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
                 response.EnsureSuccessStatusCode();
                 return response;
-                // string responseBody = await client.GetStringAsync(uri);
             }
             catch (HttpRequestException e)
             {
