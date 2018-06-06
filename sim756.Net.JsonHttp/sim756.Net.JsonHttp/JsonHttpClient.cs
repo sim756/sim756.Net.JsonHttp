@@ -178,10 +178,10 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url"></param>
         /// <param name="webClient"></param>
-        public JsonHttpClient(string url, WebClient webClient)
+        public JsonHttpClient(string url, HttpClient httpClient)
         {
             this.Url = url;
-            this.WebClient = webClient;
+            this.HttpClient = httpClient;
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = (this.HttpClient ?? new HttpClient()).GetAsync(Url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+                return response.Content.ReadAsAsync<T>().Result;
                 // string responseBody = await client.GetStringAsync(uri);
             }
             catch (HttpRequestException e)
@@ -238,7 +238,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = await (this.HttpClient ?? new HttpClient()).GetAsync(Url);
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                return Object = await response.Content.ReadAsAsync<T>();
             }
             catch (HttpRequestException e)
             {
@@ -260,7 +260,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = httpClient.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+                return Object = response.Content.ReadAsAsync<T>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -282,7 +282,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = await httpClient.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                return response.Content.ReadAsAsync<T>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -303,7 +303,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = httpClient.GetAsync(Url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result);
+                return response.Content.ReadAsAsync<T>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -324,7 +324,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = await httpClient.GetAsync(Url);
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                return response.Content.ReadAsAsync<T>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -340,21 +340,18 @@ namespace sim756.Net.JsonHttp
         /// <returns></returns>
         public T Deserialize(string url, bool keepUrl = true)
         {
-            return JsonConvert.DeserializeObject<T>((this.WebClient ?? new WebClient()).DownloadString(IsUrlNull(url)));
-        }
-
-        /// <summary>
-        /// [For internal usage of the class only.]
-        /// </summary>
-        /// <param name="webClient">Customized WebClient.</param>
-        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
-        private void IsKeepWebClient(ref WebClient webClient, bool keepWebClient)
-        {
-            if (keepWebClient == true)
+            try
             {
-                this.WebClient = webClient;
+                HttpResponseMessage response = this.HttpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<T>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
             }
         }
+
 
         /// <summary>
         /// 
@@ -408,25 +405,57 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="webClient"></param>
+        /// <param name="httpClient"></param>
         /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
-        public void DeserializeInside(WebClient webClient, bool keepWebClient = true)
+        public void DeserializeInside(HttpClient httpClient, bool keepWebClient = true)
         {
-            IsKeepWebClient(ref webClient, keepWebClient);
-            Object = JsonConvert.DeserializeObject<T>(((webClient ?? this.WebClient) ?? new WebClient()).DownloadString(Url));
+            IsKeepHttpClient(ref httpClient, keepWebClient);
+            HttpResponseMessage response = httpClient.GetAsync(Url).Result;
+            response.EnsureSuccessStatusCode();
+            Object = response.Content.ReadAsAsync<T>().Result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpClient"></param>
+        /// <param name="keepHttpClient"></param>
+        public async void DeserializeInsideAsync(HttpClient httpClient, bool keepHttpClient = true)
+        {
+            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            HttpResponseMessage response = await httpClient.GetAsync(Url);
+            response.EnsureSuccessStatusCode();
+            Object = await response.Content.ReadAsAsync<T>();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="webClient"></param>
+        /// <param name="httpClient"></param>
         /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        /// <param name="keepWebClient">Whether to assign url parameter to the Url property.</param>
-        public void DeserializeInside(string url, WebClient webClient, bool keepUrl = false, bool keepWebClient = false)
+        /// <param name="keepHttpClient">Whether to assign url parameter to the Url property.</param>
+        public void DeserializeInside(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
         {
-            IsKeepWebClient(ref webClient, keepWebClient);
-            Object = JsonConvert.DeserializeObject<T>(((webClient ?? this.WebClient) ?? new WebClient()).DownloadString(url));
+            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            HttpResponseMessage response = httpClient.GetAsync(url).Result;
+            response.EnsureSuccessStatusCode();
+            Object = response.Content.ReadAsAsync<T>().Result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="keepUrl"></param>
+        /// <param name="keepHttpClient"></param>
+        public async void DeserializeInsideAsync(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
+        {
+            IsKeepHttpClient(ref httpClient, keepHttpClient);
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            Object = await response.Content.ReadAsAsync<T>();
         }
 
         /// <summary>
