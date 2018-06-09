@@ -51,7 +51,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="webClient"></param>
+        /// <param name="httpClient"></param>
         public JsonHttpClient(string url, HttpClient httpClient)
         {
             this.Url = url;
