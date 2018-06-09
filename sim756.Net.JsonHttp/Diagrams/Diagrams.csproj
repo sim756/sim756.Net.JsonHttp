@@ -47,6 +47,9 @@
     <Compile Include="..\sim756.Net.JsonHttp\JsonHttpClient.cs">
       <Link>JsonHttpClient.cs</Link>
     </Compile>
+    <Compile Include="..\sim756.Net.JsonHttp\JsonHttpClientT.cs">
+      <Link>JsonHttpClientT.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
