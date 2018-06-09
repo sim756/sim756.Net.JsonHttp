@@ -26,11 +26,6 @@ namespace sim756.Net.JsonHttp
         public string Url { get; set; }
 
         /// <summary>
-        /// Customized WebClient.
-        /// </summary>
-        public WebClient WebClient { get; set; }
-
-        /// <summary>
         /// Customized HttpClient
         /// </summary>
         public HttpClient HttpClient { get; set; }
