@@ -10,8 +10,8 @@
   <Class Name="sim756.Net.JsonHttp.JsonHttpClient&lt;T&gt;">
     <Position X="5" Y="0.5" Width="10.25" />
     <TypeIdentifier>
-      <HashCode>CAIAAAAAAggAAAAgAIAAAAIACAJAAEAACAAAAgAAAEI=</HashCode>
-      <FileName>D:\sim756\Source\GitHub\Repos\sim756.Net.JsonHttp\sim756.Net.JsonHttp\sim756.Net.JsonHttp\JsonHttpClient.cs</FileName>
+      <HashCode>CAIAAAAAAggAAAAgAIAAAAIACAJAAEAACAAAAgAAAAI=</HashCode>
+      <FileName>D:\sim756\Source\GitHub\Repos\sim756.Net.JsonHttp\sim756.Net.JsonHttp\sim756.Net.JsonHttp\JsonHttpClientT.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
