@@ -11,16 +11,11 @@ namespace Example
         static void Main(string[] args)
         {
             Example example;
-            string json;
-
-            WebClient webClient = new WebClient()
+            string json;            
+            HttpClient httpClient = new HttpClient()
             {
-                BaseAddress = "http://www.example.com",
-                Encoding = Encoding.Unicode,
-                Credentials = new Credential()
-            };
 
-            HttpClient httpClient = new HttpClient();
+            };
 
             //1 Examples - JsonHttpClient<T>
             //1.1
@@ -45,7 +40,7 @@ namespace Example
             example = new JsonHttpClient<Example>()
             {
                 Url = "http://www.example.com",
-                WebClient = webClient
+                HttpClient = httpClient
             }.Deserialize();
 
             //1.7
