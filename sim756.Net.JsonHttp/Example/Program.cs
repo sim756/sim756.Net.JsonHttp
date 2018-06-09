@@ -57,7 +57,7 @@ namespace Example
             example = JsonHttpClient.Deserialize<Example>("http://www.example.com");
 
             //2.2
-            example = JsonHttpClient.Deserialize<Example>("http://www.example.com", webClient);
+            //example = JsonHttpClient.Deserialize<Example>("http://www.example.com", httpClient);
 
             //2.3
             example = JsonHttpClient.DeserializeString<Example>("....JSON....");
