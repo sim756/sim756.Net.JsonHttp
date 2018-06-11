@@ -40,7 +40,7 @@ namespace sim756.Net.JsonHttp
         /// <returns>Downloaded JSON in string.</returns>
         public static async Task<string> GetAsync(string url)
         {
-            //return (new WebClient()).DownloadString(url);
+            //return (new HttpClient()).DownloadString(url);
             try
             {
                 HttpResponseMessage response = await new HttpClient().GetAsync(url);
@@ -240,7 +240,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Posts JSON to the URL using the specified WebClient.
+        /// Posts JSON to the URL using the specified HttpClient.
         /// </summary>
         public static TResponse Post<TResponse>(string json, string url, HttpClient httpClient)
         {
@@ -261,7 +261,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Posts JSON to the URL using the specified WebClient.
+        /// Posts JSON to the URL using the specified HttpClient.
         /// </summary>
         public static async Task<TResponse> PostAsync<TResponse>(string json, string url, HttpClient httpClient)
         {
@@ -282,23 +282,85 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Serializes the object and posts it to the URL specified.
+        /// 
         /// </summary>
-        /// <param name="objectToPost">Object to serialize and post.</param>
-        /// <param name="url">URL.</param>
-        public void Post<T>(T objectToPost, string url)
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static HttpResponseMessage Post(object objectToPost, string url)
         {
-            new WebClient().UploadString(url, "POST", JsonConvert.SerializeObject(objectToPost, Formatting.Indented));
+            try
+            {
+                HttpResponseMessage response = new HttpClient().PostAsJsonAsync(new Uri(url), objectToPost).Result;
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
-        /// Posts JSON to the URL specified.
+        /// 
         /// </summary>
-        /// <param name="json">JSON.</param>
-        /// <param name="url">URL.</param>
-        public static void Post(string json, string url)
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static async Task<HttpResponseMessage> PostAsync(object objectToPost, string url)
         {
-            new WebClient().UploadString(url, "POST", json);
+            try
+            {
+                HttpResponseMessage response = await new HttpClient().PostAsJsonAsync(new Uri(url), objectToPost);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <param name="json"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static TResponse Post<TResponse>(string json, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = new HttpClient().PostAsync(new Uri(url), new StringContent(json)).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<TResponse>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <param name="json"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static async Task<TResponse> PostAsync<TResponse>(string json, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await new HttpClient().PostAsync(new Uri(url), new StringContent(json));
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<TResponse>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
     }
 }
