@@ -66,11 +66,9 @@ namespace Example
             json = JsonHttpClient.Get("http://www.example.com");
 
             //2.5
-            json = JsonHttpClient.Get("http://www.example.com", new System.Net.WebClient()
+            json = JsonHttpClient.Get("http://www.example.com", new HttpClient()
             {
-                BaseAddress = "http://www.example.com",
-                Encoding = Encoding.Unicode,
-                Credentials = new Credential()
+
             });
 
             //2.6
