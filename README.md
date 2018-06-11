@@ -1,5 +1,6 @@
 # sim756.Net.JsonHttp
 
+#### **JsonHttpClient**
 #### **JsonHttpClient\<T\>**
 
 A simplified Generic method to GET or POST JSON using HTTP, & get it deserialized or serialized into the Object of specified type.
@@ -17,27 +18,25 @@ Sample sample = new JsonHttpClient<Sample>("http://localhost:10000/api/values").
 example = new JsonHttpClient<Example>("http://www.example.com").Deserialize();
 
 //1.2
-example = new JsonHttpClient<Example>("http://www.example.com", webClient).Deserialize();
+example = new JsonHttpClient<Example>("http://www.example.com", httpClient).Deserialize();
 
 //1.3
-example = new JsonHttpClient<Example>("http://www.example.com", new WebClient()
+example = new JsonHttpClient<Example>("http://www.example.com", new HttpClient()
 {
-    BaseAddress = "http://www.example.com",
-    Encoding = Encoding.Unicode,
-    Credentials = new Credential()
+
 }).Deserialize();
 
 //1.4
 example = new JsonHttpClient<Example>().Deserialize("http://www.example.com");
 
 //1.5
-example = new JsonHttpClient<Example>().Deserialize("http://www.example.com", webClient);
+example = new JsonHttpClient<Example>().Deserialize("http://www.example.com", httpClient);
 
 //1.6
 example = new JsonHttpClient<Example>()
 {
     Url = "http://www.example.com",
-    WebClient = webClient
+    HttpClient = httpClient
 }.Deserialize();
 
 //1.7
@@ -54,7 +53,7 @@ bool property2 = jsonHttpClient.Object.Property2;
 example = JsonHttpClient.Deserialize<Example>("http://www.example.com");
 
 //2.2
-example = JsonHttpClient.Deserialize<Example>("http://www.example.com", webClient);
+example = JsonHttpClient.Deserialize<Example>("http://www.example.com", HttpClient);
 
 //2.3
 example = JsonHttpClient.DeserializeString<Example>("....JSON....");
@@ -63,11 +62,9 @@ example = JsonHttpClient.DeserializeString<Example>("....JSON....");
 json = JsonHttpClient.Get("http://www.example.com");
 
 //2.5
-json = JsonHttpClient.Get("http://www.example.com", new System.Net.WebClient()
+json = JsonHttpClient.Get("http://www.example.com", new HttpClient()
 {
-    BaseAddress = "http://www.example.com",
-    Encoding = Encoding.Unicode,
-    Credentials = new Credential()
+
 });
 
 //2.6
@@ -98,4 +95,3 @@ Sadequl Islam Mithun
 > [https://twitter.com/sim756](https://twitter.com/sim756)
 >
 > [https://www.linkedin.com/in/sim756](https://www.linkedin.com/in/sim756)
-
