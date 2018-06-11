@@ -14,35 +14,124 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient
     {
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string Get(string url)
+        {
+            //return httpClient.GetStringAsync(new Uri(url)).Result;
+            try
+            {
+                HttpResponseMessage response = new HttpClient().GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsStringAsync().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Downloads JSON from specified URL.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
         /// <returns>Downloaded JSON in string.</returns>
-        public static string Get(string url)
+        public static async Task<string> GetAsync(string url)
         {
-            return (new WebClient()).DownloadString(url);
+            //return (new HttpClient()).DownloadString(url);
+            try
+            {
+                HttpResponseMessage response = await new HttpClient().GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
-        /// Downloads JSON from specified URL using WebClient.
+        /// Downloads JSON from specified URL using HttpClient.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
-        /// <param name="webClient">Optional. Customized WebClient.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
         /// <returns>Downloaded JSON in string.</returns>
-        public static string Get(string url, WebClient webClient)
+        public static string Get(string url, HttpClient httpClient)
         {
-            return (webClient ?? new WebClient()).DownloadString(url);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsStringAsync().Result;
+
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
-        /// Downloads JSON from the URL using default WebClient and returns the object into type T.
+        /// Downloads JSON from specified URL using HttpClient.
+        /// </summary>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
+        /// <returns>Downloaded JSON in string.</returns>
+        public static async Task<string> GetAsync(string url, HttpClient httpClient)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Downloads JSON from the URL using default HttpClient and returns the object into type T.
         /// </summary>
         /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
         /// <param name="url">URL to download the JSON from.</param>
         /// <returns>Deserialized object into type T.</returns>
         public static T Deserialize<T>(string url)
         {
-            return JsonConvert.DeserializeObject<T>(new WebClient().DownloadString(url));
+            try
+            {
+                HttpResponseMessage response = (new HttpClient()).GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<T>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Downloads JSON from the URL using default HttpClient and returns the object into type T.
+        /// </summary>
+        /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <returns>Deserialized object into type T.</returns>
+        public static async Task<T> DeserializeAsync<T>(string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await (new HttpClient()).GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<T>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -50,11 +139,41 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
         /// <param name="url">URL to download the JSON from.</param>
-        /// <param name="webClient">Optional. Customized WebClient.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
         /// <returns>Deserialized object into type T.</returns>
-        public static T Deserialize<T>(string url, WebClient webClient = null)
+        public static T Deserialize<T>(string url, HttpClient httpClient)
         {
-            return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(url));
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<T>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Downloads JSON from the URL. 
+        /// </summary>
+        /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
+        /// <returns>Deserialized object into type T.</returns>
+        public static async Task<T> DeserializeAsync<T>(string url, HttpClient httpClient)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<T>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -81,52 +200,167 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="objectToPost">Object to serialize and post.</param>
-        /// <param name="url">URL.</param>
-        /// <param name="webClient">WebClient.</param>
-        public void Post<T>(T objectToPost, string url, WebClient webClient)
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <returns></returns>
+        public static HttpResponseMessage Post(object objectToPost, string url, HttpClient httpClient)
         {
-            if (webClient == null)
+            try
             {
-                throw new WebClientException();
+                HttpResponseMessage response = httpClient.PostAsJsonAsync(new Uri(url), objectToPost).Result;
+                response.EnsureSuccessStatusCode();
+                return response;
             }
-            webClient.UploadString(url, "POST", JsonConvert.SerializeObject(objectToPost, Formatting.Indented));
-        }
-
-        /// <summary>
-        /// Posts JSON to the URL using the specified WebClient.
-        /// </summary>
-        /// <param name="json">JSON.</param>
-        /// <param name="url">URL.</param>
-        /// <param name="webClient">WebClient.</param>
-        public static void Post(string json, string url, WebClient webClient)
-        {
-            if (webClient == null)
+            catch (HttpRequestException e)
             {
-                throw new WebClientException();
+                throw;
             }
-            webClient.UploadString(url, "POST", json);
         }
 
         /// <summary>
-        /// Serializes the object and posts it to the URL specified.
+        /// 
         /// </summary>
-        /// <param name="objectToPost">Object to serialize and post.</param>
-        /// <param name="url">URL.</param>
-        public void Post<T>(T objectToPost, string url)
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <returns></returns>
+        public static async Task<HttpResponseMessage> PostAsync(object objectToPost, string url, HttpClient httpClient)
         {
-            new WebClient().UploadString(url, "POST", JsonConvert.SerializeObject(objectToPost, Formatting.Indented));
+            try
+            {
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
-        /// Posts JSON to the URL specified.
+        /// Posts JSON to the URL using the specified HttpClient.
         /// </summary>
-        /// <param name="json">JSON.</param>
-        /// <param name="url">URL.</param>
-        public static void Post(string json, string url)
+        public static TResponse Post<TResponse>(string json, string url, HttpClient httpClient)
         {
-            new WebClient().UploadString(url, "POST", json);
+            if (httpClient == null)
+            {
+                throw new HttpClientException();
+            }
+            try
+            {
+                HttpResponseMessage response = httpClient.PostAsync(new Uri(url), new StringContent(json)).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<TResponse>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Posts JSON to the URL using the specified HttpClient.
+        /// </summary>
+        public static async Task<TResponse> PostAsync<TResponse>(string json, string url, HttpClient httpClient)
+        {
+            if (httpClient == null)
+            {
+                throw new HttpClientException();
+            }
+            try
+            {
+                HttpResponseMessage response = await httpClient.PostAsync(new Uri(url), new StringContent(json));
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<TResponse>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static HttpResponseMessage Post(object objectToPost, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = new HttpClient().PostAsJsonAsync(new Uri(url), objectToPost).Result;
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static async Task<HttpResponseMessage> PostAsync(object objectToPost, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await new HttpClient().PostAsJsonAsync(new Uri(url), objectToPost);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <param name="json"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static TResponse Post<TResponse>(string json, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = new HttpClient().PostAsync(new Uri(url), new StringContent(json)).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<TResponse>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <param name="json"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static async Task<TResponse> PostAsync<TResponse>(string json, string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await new HttpClient().PostAsync(new Uri(url), new StringContent(json));
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<TResponse>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
     }
 }
