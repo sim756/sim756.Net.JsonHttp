@@ -200,32 +200,85 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="objectToPost">Object to serialize and post.</param>
-        /// <param name="url">URL.</param>
-        /// <param name="webClient">WebClient.</param>
-        public void Post<T>(T objectToPost, string url, WebClient webClient)
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <returns></returns>
+        public static HttpResponseMessage Post(object objectToPost, string url, HttpClient httpClient)
         {
-            if (webClient == null)
+            try
             {
-                throw new WebClientException();
+                HttpResponseMessage response = httpClient.PostAsJsonAsync(new Uri(url), objectToPost).Result;
+                response.EnsureSuccessStatusCode();
+                return response;
             }
-            webClient.UploadString(url, "POST", JsonConvert.SerializeObject(objectToPost, Formatting.Indented));
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectToPost"></param>
+        /// <param name="url"></param>
+        /// <param name="httpClient"></param>
+        /// <returns></returns>
+        public static async Task<HttpResponseMessage> PostAsync(object objectToPost, string url, HttpClient httpClient)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
         /// Posts JSON to the URL using the specified WebClient.
         /// </summary>
-        /// <param name="json">JSON.</param>
-        /// <param name="url">URL.</param>
-        /// <param name="webClient">WebClient.</param>
-        public static void Post(string json, string url, WebClient webClient)
+        public static TResponse Post<TResponse>(string json, string url, HttpClient httpClient)
         {
-            if (webClient == null)
+            if (httpClient == null)
             {
-                throw new WebClientException();
+                throw new HttpClientException();
             }
-            webClient.UploadString(url, "POST", json);
+            try
+            {
+                HttpResponseMessage response = httpClient.PostAsync(new Uri(url), new StringContent(json)).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<TResponse>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Posts JSON to the URL using the specified WebClient.
+        /// </summary>
+        public static async Task<TResponse> PostAsync<TResponse>(string json, string url, HttpClient httpClient)
+        {
+            if (httpClient == null)
+            {
+                throw new HttpClientException();
+            }
+            try
+            {
+                HttpResponseMessage response = await httpClient.PostAsync(new Uri(url), new StringContent(json));
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<TResponse>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
