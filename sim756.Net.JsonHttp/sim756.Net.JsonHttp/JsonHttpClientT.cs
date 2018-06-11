@@ -349,7 +349,7 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = await this.HttpClient.PostAsJsonAsync(new Uri(this.Url), objectToPost);
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                return await response.Content.ReadAsAsync<TResponse>();
             }
             catch (HttpRequestException e)
             {
@@ -414,7 +414,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = this.HttpClient.GetAsync(this.Url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<TResponse>(response.Content.ReadAsStringAsync().Result);
+                return  response.Content.ReadAsAsync<TResponse>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -442,7 +442,7 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = await this.HttpClient.PostAsJsonAsync(new Uri(url), this.Object);
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                return await response.Content.ReadAsAsync<TResponse>();
             }
             catch (HttpRequestException e)
             {
@@ -508,7 +508,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = this.HttpClient.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<TResponse>(response.Content.ReadAsStringAsync().Result);
+                return response.Content.ReadAsAsync<TResponse>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -539,7 +539,7 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), this.Object);
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                return await response.Content.ReadAsAsync<TResponse>();
             }
             catch (HttpRequestException e)
             {
@@ -615,7 +615,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = httpClient.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<TResponse>(response.Content.ReadAsStringAsync().Result);
+                return response.Content.ReadAsAsync<TResponse>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -646,7 +646,7 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = await this.HttpClient.PostAsJsonAsync(new Uri(url), objectToPost);
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                return await response.Content.ReadAsAsync<TResponse>();
             }
             catch (HttpRequestException e)
             {
@@ -723,7 +723,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = this.HttpClient.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<TResponse>(response.Content.ReadAsStringAsync().Result);
+                return response.Content.ReadAsAsync<TResponse>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -751,7 +751,7 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(this.Url), this.Object);
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                return await response.Content.ReadAsAsync<TResponse>();
             }
             catch (HttpRequestException e)
             {
@@ -818,7 +818,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = httpClient.GetAsync(this.Url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<TResponse>(response.Content.ReadAsStringAsync().Result);
+                return response.Content.ReadAsAsync<TResponse>().Result;
             }
             catch (HttpRequestException e)
             {
@@ -885,7 +885,7 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = await httpClient.PostAsJsonAsync(new Uri(url), objectToPost);
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(await response.Content.ReadAsStringAsync());
+                return await response.Content.ReadAsAsync<TResponse>();
             }
             catch (HttpRequestException e)
             {
@@ -971,7 +971,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = httpClient.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
-                return JsonConvert.DeserializeObject<TResponse>(response.Content.ReadAsStringAsync().Result);
+                return response.Content.ReadAsAsync<TResponse>().Result;
             }
             catch (HttpRequestException e)
             {
