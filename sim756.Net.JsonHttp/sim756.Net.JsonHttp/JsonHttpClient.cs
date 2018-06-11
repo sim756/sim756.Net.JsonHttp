@@ -14,35 +14,124 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient
     {
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string Get(string url)
+        {
+            //return httpClient.GetStringAsync(new Uri(url)).Result;
+            try
+            {
+                HttpResponseMessage response = new HttpClient().GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsStringAsync().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Downloads JSON from specified URL.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
         /// <returns>Downloaded JSON in string.</returns>
-        public static string Get(string url)
+        public static async Task<string> GetAsync(string url)
         {
-            return (new WebClient()).DownloadString(url);
+            //return (new WebClient()).DownloadString(url);
+            try
+            {
+                HttpResponseMessage response = await new HttpClient().GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
-        /// Downloads JSON from specified URL using WebClient.
+        /// Downloads JSON from specified URL using HttpClient.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
-        /// <param name="webClient">Optional. Customized WebClient.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
         /// <returns>Downloaded JSON in string.</returns>
-        public static string Get(string url, WebClient webClient)
+        public static string Get(string url, HttpClient httpClient)
         {
-            return (webClient ?? new WebClient()).DownloadString(url);
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsStringAsync().Result;
+
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
-        /// Downloads JSON from the URL using default WebClient and returns the object into type T.
+        /// Downloads JSON from specified URL using HttpClient.
+        /// </summary>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
+        /// <returns>Downloaded JSON in string.</returns>
+        public static async Task<string> GetAsync(string url, HttpClient httpClient)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Downloads JSON from the URL using default HttpClient and returns the object into type T.
         /// </summary>
         /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
         /// <param name="url">URL to download the JSON from.</param>
         /// <returns>Deserialized object into type T.</returns>
         public static T Deserialize<T>(string url)
         {
-            return JsonConvert.DeserializeObject<T>(new WebClient().DownloadString(url));
+            try
+            {
+                HttpResponseMessage response = (new HttpClient()).GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<T>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Downloads JSON from the URL using default HttpClient and returns the object into type T.
+        /// </summary>
+        /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <returns>Deserialized object into type T.</returns>
+        public static async Task<T> DeserializeAsync<T>(string url)
+        {
+            try
+            {
+                HttpResponseMessage response = await (new HttpClient()).GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<T>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -50,11 +139,41 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
         /// <param name="url">URL to download the JSON from.</param>
-        /// <param name="webClient">Optional. Customized WebClient.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
         /// <returns>Deserialized object into type T.</returns>
-        public static T Deserialize<T>(string url, WebClient webClient = null)
+        public static T Deserialize<T>(string url, HttpClient httpClient)
         {
-            return JsonConvert.DeserializeObject<T>((webClient ?? new WebClient()).DownloadString(url));
+            try
+            {
+                HttpResponseMessage response = httpClient.GetAsync(url).Result;
+                response.EnsureSuccessStatusCode();
+                return response.Content.ReadAsAsync<T>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Downloads JSON from the URL. 
+        /// </summary>
+        /// <typeparam name="T">Deserialize the Object into this type.</typeparam>
+        /// <param name="url">URL to download the JSON from.</param>
+        /// <param name="httpClient">Optional. Customized HttpClient.</param>
+        /// <returns>Deserialized object into type T.</returns>
+        public static async Task<T> DeserializeAsync<T>(string url, HttpClient httpClient)
+        {
+            try
+            {
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsAsync<T>();
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
         }
 
         /// <summary>
