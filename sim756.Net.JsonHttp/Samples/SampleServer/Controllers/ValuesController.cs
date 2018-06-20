@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SampleModels;
 
 namespace SampleServer.Controllers
 {
@@ -12,10 +13,17 @@ namespace SampleServer.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<Model1> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new Model1(){Property1 = "sim756", Property2 = "JsonHttpClient"};
         }
+
+        //// GET api/values
+        //[HttpGet]
+        //public ActionResult<IEnumerable<string>> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET api/values/5
         [HttpGet("{id}")]
