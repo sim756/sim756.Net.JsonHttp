@@ -267,7 +267,7 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
         /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        public async Task DeserializeInsideAync(string url, bool keepUrl = true)
+        public async Task DeserializeInsideAsync(string url, bool keepUrl = true)
         {
             HttpResponseMessage response = await this.HttpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
