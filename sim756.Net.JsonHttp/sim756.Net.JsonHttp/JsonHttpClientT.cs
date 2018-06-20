@@ -226,10 +226,29 @@ namespace sim756.Net.JsonHttp
             }
         }
 
+
         /// <summary>
         /// Downloads JSON from Url (property), using a WebClient unless WebClient (property) is null and deserializes it into the type of T and assigns it into the Object property.
         /// </summary>
-        public async void DeserializeInside()
+        public void DeserializeInside()
+        {
+            try
+            {
+                HttpResponseMessage response = (this.HttpClient ?? new HttpClient()).GetAsync(Url).Result;
+                response.EnsureSuccessStatusCode();
+                Object = response.Content.ReadAsAsync<T>().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Downloads JSON from Url (property), using a WebClient unless WebClient (property) is null and deserializes it into the type of T and assigns it into the Object property.
+        /// </summary>
+        public async void DeserializeInsideAsync()
         {
             try
             {
