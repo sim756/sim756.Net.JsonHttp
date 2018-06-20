@@ -15,7 +15,9 @@ namespace SampleClient
             {
                 Console.WriteLine("Example 1");
 
-                Console.WriteLine(new JsonHttpClient<Model1>("http://localhost:5000/api/values").Deserialize().Property1);
+                Model1 model1 = JsonHttpClient.Deserialize<Model1>("http://localhost:5000/api/values");
+
+                Console.WriteLine(model1.Property1);
             }
 
             Console.WriteLine("");
@@ -36,10 +38,9 @@ namespace SampleClient
             {
                 Console.WriteLine("Example 3");
 
-                Model1 model1 = JsonHttpClient.Deserialize<Model1>("http://localhost:5000/api/values");
-
-                Console.WriteLine(model1.Property1);
+                Console.WriteLine(new JsonHttpClient<Model1>("http://localhost:5000/api/values").Deserialize().Property1);
             }
+
 
             Console.WriteLine("");
             Console.Write("press any key to continue...");
