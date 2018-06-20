@@ -13,13 +13,18 @@ namespace SampleClient
 
             //Example 1
             {
+                Console.WriteLine("Example 1");
+
                 Console.WriteLine(new JsonHttpClient<Model1>("http://localhost:5000/api/values").Deserialize().Property1);
             }
 
+            Console.WriteLine("");
+
             //Example 1
             {
-                JsonHttpClient<Model1> jsonHttpClient = new JsonHttpClient<Model1>("http://localhost:5000/api/values");
+                Console.WriteLine("Example 2");
 
+                JsonHttpClient<Model1> jsonHttpClient = new JsonHttpClient<Model1>("http://localhost:5000/api/values");
                 jsonHttpClient.DeserializeInside();
 
                 Console.WriteLine( jsonHttpClient.Object.Property1);
