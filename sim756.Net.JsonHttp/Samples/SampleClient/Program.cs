@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using sim756.Net.JsonHttp;
 using SampleModels;
 
@@ -41,6 +43,24 @@ namespace SampleClient
                 Console.WriteLine(new JsonHttpClient<Model1>("http://localhost:5000/api/values").Deserialize().Property1);
             }
 
+            Console.WriteLine("");
+
+            //Example 4
+            {
+                Console.WriteLine("Example 4");
+
+                JsonHttpClient<Model1> jsonHttpClient = new JsonHttpClient<Model1>()
+                {
+                    Url = "http://localhost:5000/api/values",
+                    HttpClient = new HttpClient(new SocketsHttpHandler()
+                    {
+                        
+                    })
+                };
+                jsonHttpClient.DeserializeInside();
+
+                Console.WriteLine(jsonHttpClient.Object.Property1);
+            }
 
             Console.WriteLine("");
             Console.Write("press any key to continue...");
