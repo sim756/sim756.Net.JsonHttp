@@ -14,10 +14,10 @@ namespace sim756.Net.JsonHttp
     public class JsonHttpClient
     {
         /// <summary>
-        /// 
+        /// Gets string from URL.
         /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
+        /// <param name="url">URL to get the string from.</param>
+        /// <returns>String downloaded from the URL.</returns>
         public static string Get(string url)
         {
             //return httpClient.GetStringAsync(new Uri(url)).Result;
@@ -34,13 +34,12 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Downloads JSON from specified URL.
+        /// Downloads string from the URL.
         /// </summary>
-        /// <param name="url">URL to download the JSON from.</param>
-        /// <returns>Downloaded JSON in string.</returns>
+        /// <param name="url">URL to download the string from.</param>
+        /// <returns>String downloaded from the URL.</returns>
         public static async Task<string> GetAsync(string url)
         {
-            //return (new HttpClient()).DownloadString(url);
             try
             {
                 HttpResponseMessage response = await new HttpClient().GetAsync(url);
@@ -54,11 +53,11 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Downloads JSON from specified URL using HttpClient.
+        /// Downloads string from the URL using HttpClient.
         /// </summary>
         /// <param name="url">URL to download the JSON from.</param>
         /// <param name="httpClient">Optional. Customized HttpClient.</param>
-        /// <returns>Downloaded JSON in string.</returns>
+        /// <returns>String downloaded from the URL.</returns>
         public static string Get(string url, HttpClient httpClient)
         {
             try
@@ -66,7 +65,6 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = httpClient.GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
                 return response.Content.ReadAsStringAsync().Result;
-
             }
             catch (HttpRequestException e)
             {
