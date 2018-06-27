@@ -196,12 +196,12 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Serializes the object and posts it to the URL using specified HttpClient.
         /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
-        /// <param name="httpClient"></param>
-        /// <returns></returns>
+        /// <param name="objectToPost">Object to serialize and post.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <param name="httpClient">HttpClient.</param>
+        /// <returns>HttpResponseMessage.</returns>
         public static HttpResponseMessage Post(object objectToPost, string url, HttpClient httpClient)
         {
             try
@@ -217,12 +217,12 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Serializes the object and posts it to the URL using specified HttpClient.
         /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
-        /// <param name="httpClient"></param>
-        /// <returns></returns>
+        /// <param name="objectToPost">Object to serialize and post.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <param name="httpClient">HttpClient.</param>
+        /// <returns>HttpResponseMessage.</returns>
         public static async Task<HttpResponseMessage> PostAsync(object objectToPost, string url, HttpClient httpClient)
         {
             try
@@ -240,6 +240,11 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// Posts JSON to the URL using the specified HttpClient.
         /// </summary>
+        /// <typeparam name="TResponse">Type to parse the reponding JSON string into.</typeparam>
+        /// <param name="json">JSON string to be posted.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <param name="httpClient">HttpClient.</param>
+        /// <returns>Returns object of type TResponse.</returns
         public static TResponse Post<TResponse>(string json, string url, HttpClient httpClient)
         {
             if (httpClient == null)
@@ -261,6 +266,11 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// Posts JSON to the URL using the specified HttpClient.
         /// </summary>
+        /// <typeparam name="TResponse">Type to parse the reponding JSON string into.</typeparam>
+        /// <param name="json">JSON string to be posted.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <param name="httpClient">HttpClient.</param>
+        /// <returns>Returns object of type TResponse.</returns>
         public static async Task<TResponse> PostAsync<TResponse>(string json, string url, HttpClient httpClient)
         {
             if (httpClient == null)
@@ -280,11 +290,11 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Serializes the object and posts it to the URL.
         /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
+        /// <param name="objectToPost">Object to serialize and post.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <returns>HttpResponseMessage.</returns>
         public static HttpResponseMessage Post(object objectToPost, string url)
         {
             try
@@ -300,11 +310,11 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Serializes the object and posts it to the URL.
         /// </summary>
-        /// <param name="objectToPost"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
+        /// <param name="objectToPost">Object to serialize and post.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <returns>HttpResponseMessage.</returns>
         public static async Task<HttpResponseMessage> PostAsync(object objectToPost, string url)
         {
             try
@@ -320,12 +330,12 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Posts JSON string to the URL.
         /// </summary>
-        /// <typeparam name="TResponse"></typeparam>
-        /// <param name="json"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
+        /// <typeparam name="TResponse">Type to parse the reponding JSON string into.</typeparam>
+        /// <param name="json">JSON string to be posted.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <returns>Returns object of type TResponse.</returns>
         public static TResponse Post<TResponse>(string json, string url)
         {
             try
@@ -341,12 +351,12 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Posts JSON string to the URL.
         /// </summary>
-        /// <typeparam name="TResponse"></typeparam>
-        /// <param name="json"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
+        /// <typeparam name="TResponse">Type to parse the reponding JSON string into.</typeparam>
+        /// <param name="json">JSON string to be posted.</param>
+        /// <param name="url">URL to post JSON string to.</param>
+        /// <returns>Returns object of type TResponse.</returns>
         public static async Task<TResponse> PostAsync<TResponse>(string json, string url)
         {
             try
