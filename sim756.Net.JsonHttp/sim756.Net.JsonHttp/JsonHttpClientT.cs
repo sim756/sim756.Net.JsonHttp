@@ -84,9 +84,9 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Deserializes the object getting JSON using HttpClient (property) and URL (property).
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns the object deserializing into the type of T.</returns>
         public T Deserialize()
         {
             try
@@ -103,7 +103,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// Deserialize the object into the Object property downloading the JSON from URL (property) using WebClient (property).
+        /// Deserialize the object into the Object property downloading the JSON from URL (property) using HttpClient (property).
         /// </summary>
         /// <returns>Deserialized object of type T.</returns>
         public async Task<T> DeserializeAsync()
@@ -121,12 +121,12 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Deserialize the object into the Object property downloading the JSON from url (parameter) using HttpClient (parameter).
         /// </summary>
-        /// <param name="url"></param>
+        /// <param name="url">URL to download JSON from.</param>
         /// <param name="httpClient"></param>
-        /// <param name="keepUrl"></param>
-        /// <param name="keepHttpClient"></param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
         public T Deserialize(string url, HttpClient httpClient, bool keepUrl = true, bool keepHttpClient = true)
         {
@@ -147,8 +147,8 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url"></param>
         /// <param name="httpClient"></param>
-        /// <param name="keepUrl"></param>
-        /// <param name="keepHttpClient"></param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
         public async Task<T> DeserializeAsync(string url, HttpClient httpClient, bool keepUrl = true, bool keepHttpClient = true)
         {
@@ -168,7 +168,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="httpClient"></param>
-        /// <param name="keepHttpClient"></param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
         public T Deserialize(HttpClient httpClient, bool keepHttpClient = true)
         {
@@ -189,7 +189,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="httpClient"></param>
-        /// <param name="keepHttpClient"></param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
         public async Task<T> DeserializeAsync(HttpClient httpClient, bool keepHttpClient = true)
         {
@@ -210,7 +210,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <returns></returns>
         public T Deserialize(string url, bool keepUrl = true)
         {
@@ -265,8 +265,8 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// Downloads JSON from Url, deserializes it into the type of T and assigns it into the Object property.
         /// </summary>
-        /// <param name="url">URL to download JSON from. Optional when Url Property is set, assign or left "null" to use Url property.</param>
-        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
+        /// <param name="url">URL to download JSON from.</param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         public async Task DeserializeInsideAsync(string url, bool keepUrl = true)
         {
             HttpResponseMessage response = await this.HttpClient.GetAsync(url);
@@ -278,7 +278,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="keepUrl"></param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         public void DeserializeInside(string url, bool keepUrl = true)
         {
             HttpResponseMessage response = this.HttpClient.GetAsync(url).Result;
@@ -299,7 +299,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="httpClient"></param>
-        /// <param name="keepHttpClient">Whether to assign url parameter to the Url property.</param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public void DeserializeInside(HttpClient httpClient, bool keepHttpClient = true)
         {
             IsKeepHttpClient(httpClient, keepHttpClient);
@@ -312,7 +312,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="httpClient"></param>
-        /// <param name="keepHttpClient"></param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public async void DeserializeInsideAsync(HttpClient httpClient, bool keepHttpClient = true)
         {
             IsKeepHttpClient(httpClient, keepHttpClient);
@@ -326,8 +326,8 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url"></param>
         /// <param name="httpClient"></param>
-        /// <param name="keepUrl">Whether to assign url parameter to the Url property.</param>
-        /// <param name="keepHttpClient">Whether to assign url parameter to the Url property.</param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public void DeserializeInside(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
         {
             IsKeepHttpClient(httpClient, keepHttpClient);
@@ -341,8 +341,8 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <param name="url"></param>
         /// <param name="httpClient"></param>
-        /// <param name="keepUrl"></param>
-        /// <param name="keepHttpClient"></param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
+        /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public async void DeserializeInsideAsync(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
         {
             IsKeepHttpClient(httpClient, keepHttpClient);
