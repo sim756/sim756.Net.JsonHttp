@@ -449,8 +449,8 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
-        /// <param name="url"></param>
-        /// <param name="keepUrl"></param>
+        /// <param name="url">URL to download JSON from.</param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <returns></returns>
         public async Task<TResponse> PostAsync<TResponse>(string url, bool keepUrl = true)
         {
@@ -472,8 +472,8 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="url"></param>
-        /// <param name="keepUrl"></param>
+        /// <param name="url">URL to download JSON from.</param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <returns></returns>
         public async Task<HttpResponseMessage> PostAsync(string url, bool keepUrl = false)
         {
@@ -494,8 +494,8 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>       
-        /// <param name="url"></param>
-        /// <param name="keepUrl"></param>
+        /// <param name="url">URL to download JSON from.</param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <returns></returns>
         public HttpResponseMessage Post(string url, bool keepUrl = false)
         {
@@ -517,8 +517,8 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>        
-        /// <param name="url"></param>
-        /// <param name="keepUrl"></param>
+        /// <param name="url">URL to download JSON from.</param>
+        /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <returns></returns>
         public TResponse Post<TResponse>(string url, bool keepUrl = false)
         {
@@ -1003,7 +1003,7 @@ namespace sim756.Net.JsonHttp
         #region internals
 
         /// <summary>
-        /// 
+        /// [For internal usage of the class only.]
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="keepObject"></param>
@@ -1016,7 +1016,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// [For internal usage of the class only.]
         /// </summary>
         /// <param name="httpClient"></param>
         /// <param name="keepHttpClient"></param>
@@ -1029,7 +1029,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// [For internal usage of the class only.]
         /// </summary>
         /// <param name="url"></param>
         /// <param name="keepUrl"></param>
