@@ -31,7 +31,7 @@ namespace sim756.Net.JsonHttp
         public HttpClient HttpClient { get; set; }
 
         /// <summary>
-        /// 
+        /// Initializer.
         /// </summary>
         public JsonHttpClient()
         {
@@ -39,19 +39,19 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        /// Initializer with URL (property).
         /// </summary>
-        /// <param name="url">Url Property.</param>
+        /// <param name="url">Url (Property).</param>
         public JsonHttpClient(string url)
         {
             this.Url = url;
         }
 
         /// <summary>
-        /// 
+        /// Initializer with URL (property) & HttpClient (property).
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         public JsonHttpClient(string url, HttpClient httpClient)
         {
             this.Url = url;
@@ -124,7 +124,7 @@ namespace sim756.Net.JsonHttp
         /// Deserialize the object into the Object property downloading the JSON from url (parameter) using HttpClient (parameter).
         /// </summary>
         /// <param name="url">URL to download JSON from.</param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
@@ -146,7 +146,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
@@ -167,7 +167,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
         public T Deserialize(HttpClient httpClient, bool keepHttpClient = true)
@@ -188,7 +188,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         /// <returns></returns>
         public async Task<T> DeserializeAsync(HttpClient httpClient, bool keepHttpClient = true)
@@ -298,7 +298,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public void DeserializeInside(HttpClient httpClient, bool keepHttpClient = true)
         {
@@ -311,7 +311,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public async void DeserializeInsideAsync(HttpClient httpClient, bool keepHttpClient = true)
         {
@@ -325,7 +325,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public void DeserializeInside(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
@@ -340,7 +340,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
         public async void DeserializeInsideAsync(string url, HttpClient httpClient, bool keepUrl = false, bool keepHttpClient = false)
@@ -545,7 +545,7 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>        
+        /// <param name="httpClient">Customized HttpClient.</param>        
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
@@ -571,7 +571,7 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <typeparam name="T"></typeparam>        
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepObject"></param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
@@ -596,7 +596,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>       
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>        
+        /// <param name="httpClient">Customized HttpClient.</param>        
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
@@ -622,7 +622,7 @@ namespace sim756.Net.JsonHttp
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>        
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>        
+        /// <param name="httpClient">Customized HttpClient.</param>        
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
@@ -758,7 +758,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
         public async Task<TResponse> PostAsync<TResponse>(HttpClient httpClient, bool keepHttpClient = true)
@@ -781,7 +781,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
         public async Task<HttpResponseMessage> PostAsync(HttpClient httpClient, bool keepHttpClient = true)
@@ -803,7 +803,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
         public HttpResponseMessage Post(HttpClient httpClient, bool keepHttpClient = true)
@@ -826,7 +826,7 @@ namespace sim756.Net.JsonHttp
         /// 
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
         public TResponse Post<TResponse>(HttpClient httpClient, bool keepHttpClient = true)
@@ -889,7 +889,7 @@ namespace sim756.Net.JsonHttp
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepObject"></param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
@@ -918,7 +918,7 @@ namespace sim756.Net.JsonHttp
         /// <typeparam name="T"></typeparam>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepObject"></param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
@@ -947,7 +947,7 @@ namespace sim756.Net.JsonHttp
         /// <typeparam name="T"></typeparam>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepObject"></param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
@@ -976,7 +976,7 @@ namespace sim756.Net.JsonHttp
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepObject"></param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
@@ -1018,7 +1018,7 @@ namespace sim756.Net.JsonHttp
         /// <summary>
         /// [For internal usage of the class only.]
         /// </summary>
-        /// <param name="httpClient"></param>
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient"></param>
         private void IsKeepHttpClient(HttpClient httpClient, bool keepHttpClient)
         {
