@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -26,6 +28,23 @@ namespace sim756.Net.JsonHttp
                 HttpResponseMessage response = new HttpClient().GetAsync(url).Result;
                 response.EnsureSuccessStatusCode();
                 return response.Content.ReadAsStringAsync().Result;
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+
+        public static TResponse Get<TResponse>(string url)
+        {
+            try
+            {
+                HttpResponseMessage httpResponseMessage
+                    = new HttpClient().GetAsync(url).Result;
+                httpResponseMessage.EnsureSuccessStatusCode();
+
+                return DeserializeString<TResponse>(httpResponseMessage.Content.ReadAsStringAsync().Result);
             }
             catch (HttpRequestException e)
             {
@@ -348,6 +367,69 @@ namespace sim756.Net.JsonHttp
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResponse"></typeparam>
+        /// <typeparam name="TPostObject"></typeparam>
+        /// <param name="postObject"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static TResponse Post<TResponse, TPostObject>(TPostObject postObject, string url)
+        {
+            try
+            {
+                HttpResponseMessage httpResponseMessage
+                    = new HttpClient().PostAsync
+                    (
+                        url,
+                        new StringContent
+                        (
+                            GetJson<TPostObject>(postObject),
+                            Encoding.UTF8,
+                            "application/json"
+                        )
+                    ).Result;
+                httpResponseMessage.EnsureSuccessStatusCode();
+
+                return DeserializeString<TResponse>(httpResponseMessage.Content.ReadAsStringAsync().Result);
+            }
+            catch (HttpRequestException e)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectToBeSerialized"></param>
+        /// <returns></returns>
+        public static string GetJson<T>(T objectToBeSerialized)
+        {
+            MemoryStream ms = new MemoryStream();
+            new DataContractJsonSerializer(typeof(T)).WriteObject(ms, objectToBeSerialized);
+            byte[] jsonBytes = ms.ToArray();
+            ms.Close();
+            return Encoding.UTF8.GetString(jsonBytes, 0, jsonBytes.Length);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonToBeDeserialized"></param>
+        /// <returns></returns>
+        public static T GetObject<T>(string jsonToBeDeserialized)
+        {
+            MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonToBeDeserialized));
+            DataContractJsonSerializer dataContractJsonSerializer = new DataContractJsonSerializer(typeof(T));
+            T temp = (T)dataContractJsonSerializer.ReadObject(memoryStream);
+            memoryStream.Close();
+            return temp;
         }
 
         /// <summary>
