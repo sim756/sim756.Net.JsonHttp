@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using sim756.Net.JsonHttp.Exceptions;
 
 namespace sim756.Net.JsonHttp
@@ -292,8 +292,8 @@ namespace sim756.Net.JsonHttp
         /// <param name="json">JSON to deserialize.</param>
         public void DeserializeStringInside(string json)
         {
-            Object = JsonConvert.DeserializeObject<T>(json);
-        }
+			Object = JsonSerializer.Deserialize<T>(json);
+		}
 
         /// <summary>
         ///
