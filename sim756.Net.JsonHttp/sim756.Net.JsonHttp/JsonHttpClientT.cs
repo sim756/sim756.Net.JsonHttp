@@ -62,7 +62,7 @@ namespace sim756.Net.JsonHttp
         /// [For internal usage of the class only.]
         /// </summary>
         /// <param name="url">URL.</param>
-        /// <returns>URL.</returns>        
+        /// <returns>URL.</returns>
         private string IsUrlNull(string url)
         {
             if (url == null && string.IsNullOrEmpty(Url))
@@ -143,7 +143,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="url"></param>
         /// <param name="httpClient">Customized HttpClient.</param>
@@ -165,7 +165,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
@@ -186,7 +186,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
@@ -207,7 +207,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="url"></param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
@@ -275,7 +275,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="url"></param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
@@ -296,7 +296,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
@@ -309,7 +309,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient">Whether to assign httpClient (parameter) into HttpClient (property).</param>
@@ -322,7 +322,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="url"></param>
         /// <param name="httpClient">Customized HttpClient.</param>
@@ -337,7 +337,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="url"></param>
         /// <param name="httpClient">Customized HttpClient.</param>
@@ -354,11 +354,11 @@ namespace sim756.Net.JsonHttp
         #region Object only
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
-        /// <param name="keepObject"></param>        
+        /// <param name="keepObject"></param>
         /// <returns></returns>
         public async Task<TResponse> PostAsync<TResponse>(T objectToPost, bool keepObject = true)
         {
@@ -377,7 +377,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="keepObject"></param>
@@ -398,7 +398,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="keepObject"></param>
@@ -420,7 +420,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
@@ -446,7 +446,7 @@ namespace sim756.Net.JsonHttp
         #region URL only
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="url">URL to download JSON from.</param>
@@ -470,7 +470,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="url">URL to download JSON from.</param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
@@ -492,8 +492,8 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
-        /// </summary>       
+        ///
+        /// </summary>
         /// <param name="url">URL to download JSON from.</param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <returns></returns>
@@ -514,9 +514,9 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        /// <typeparam name="TResponse"></typeparam>        
+        /// <typeparam name="TResponse"></typeparam>
         /// <param name="url">URL to download JSON from.</param>
         /// <param name="keepUrl">Whether to assign url (parameter) into URL (property).</param>
         /// <returns></returns>
@@ -541,11 +541,11 @@ namespace sim756.Net.JsonHttp
         #region URL and HttpClient
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="url"></param>
-        /// <param name="httpClient">Customized HttpClient.</param>        
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
@@ -567,9 +567,9 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        /// <typeparam name="T"></typeparam>        
+        /// <typeparam name="T"></typeparam>
         /// <param name="url"></param>
         /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepObject"></param>
@@ -593,10 +593,10 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
-        /// </summary>       
+        ///
+        /// </summary>
         /// <param name="url"></param>
-        /// <param name="httpClient">Customized HttpClient.</param>        
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
@@ -618,11 +618,11 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        /// <typeparam name="TResponse"></typeparam>        
+        /// <typeparam name="TResponse"></typeparam>
         /// <param name="url"></param>
-        /// <param name="httpClient">Customized HttpClient.</param>        
+        /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepUrl"></param>
         /// <param name="keepHttpClient"></param>
         /// <returns></returns>
@@ -647,7 +647,7 @@ namespace sim756.Net.JsonHttp
         #region Object and URL
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
@@ -659,7 +659,7 @@ namespace sim756.Net.JsonHttp
         {
             IsKeepObject(objectToPost, keepObject);
             IsKeepUrl(url, keepUrl);
-            
+
             try
             {
                 HttpResponseMessage response = await this.HttpClient.PostAsJsonAsync(new Uri(url), objectToPost);
@@ -674,7 +674,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
@@ -700,7 +700,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="objectToPost"></param>
         /// <param name="url"></param>
@@ -725,7 +725,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
@@ -755,7 +755,7 @@ namespace sim756.Net.JsonHttp
         #region HttpClient only
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="httpClient">Customized HttpClient.</param>
@@ -779,7 +779,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient"></param>
@@ -801,7 +801,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="httpClient">Customized HttpClient.</param>
         /// <param name="keepHttpClient"></param>
@@ -823,7 +823,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="httpClient">Customized HttpClient.</param>
@@ -850,7 +850,7 @@ namespace sim756.Net.JsonHttp
         #region all - Object, URL, HttpClient
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public HttpResponseMessage Post()
         {
@@ -867,7 +867,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public async Task<HttpResponseMessage> PostAsync()
         {
@@ -884,7 +884,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
@@ -913,7 +913,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="objectToPost"></param>
@@ -941,7 +941,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TPost"></typeparam>
         /// <typeparam name="T"></typeparam>
@@ -971,7 +971,7 @@ namespace sim756.Net.JsonHttp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TResponse"></typeparam>
         /// <param name="objectToPost"></param>
