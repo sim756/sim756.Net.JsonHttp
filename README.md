@@ -1,4 +1,5 @@
 # sim756.Net.JsonHttp
+https://www.nuget.org/packages/sim756.Net.JsonHttp
 
 #### **JsonHttpClient**
 #### **JsonHttpClient\<T\>**
