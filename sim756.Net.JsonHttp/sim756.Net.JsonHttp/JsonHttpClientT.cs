@@ -93,8 +93,7 @@ namespace sim756.Net.JsonHttp
             {
                 HttpResponseMessage response = (this.HttpClient ?? new HttpClient()).GetAsync(Url).Result;
                 response.EnsureSuccessStatusCode();
-                return response.Content.ReadAsAsync<T>().Result;
-                // string responseBody = await client.GetStringAsync(uri);
+                return response.Content.ReadAsAsync<T>().Result;                
             }
             catch (HttpRequestException e)
             {

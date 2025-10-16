@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <AssemblyVersion>7.2.2210.2</AssemblyVersion>
-    <FileVersion>7.2.2210.2</FileVersion>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyVersion>10.3.2510.1</AssemblyVersion>
+    <FileVersion>10.3.2510.1</FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>7.0.1</Version>
+    <Version>10.0.0-preview</Version>
     <Description>A simplified Generic method to GET or POST JSON using HTTP, &amp; get it deserialized or serialized into the Object of specified type.
 
 Example:
@@ -17,6 +17,8 @@ Sample sample = new JsonHttpClient&lt;Sample&gt;("http://localhost:10000/api/val
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>https://raw.githubusercontent.com/sim756/sim756.Net.JsonHttp/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/sim756/sim756.Net.JsonHttp/master/JsonHttpClient.png</PackageIconUrl>
+    <Company>sim756</Company>
+    <Authors>sim756</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -24,7 +26,7 @@ Sample sample = new JsonHttpClient&lt;Sample&gt;("http://localhost:10000/api/val
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
